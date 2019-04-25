@@ -1,0 +1,329 @@
+version: '3.5'
+networks:
+  microservice:
+    external:
+      name: microservice
+  apm:
+    external:
+      name: apm
+configs:
+  prometheus_yml:
+    file: ./prometheus/prometheus.yml
+  heartbeat_yml:
+    file: ./heartbeat/heartbeat.yml
+  fluentd_conf:
+    file: ./fluentd/fluent.conf
+
+services:
+  influxdb:
+    restart: always
+    image: tutum/influxdb:latest
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+    deploy:
+     replicas: 1
+     restart_policy:
+      condition: on-failure
+    environment:
+      - ADMIN_USER="root" 
+      - INFLUXDB_INIT_PWD="influxdb" 
+      - PRE_CREATE_DB="AppMetrics;"
+      - SERVICE_NAME=influxdb
+      - SERVICE_TAGS=apm
+      - SERVICE_REGION=DC1
+      - SERVICE_CHECK_INITIAL_STATUS=passing
+      - SERVICE_80_CHECK_HTTP=/healthcheck
+      - SERVICE_80_CHECK_INTERVAL=15s
+      - SERVICE_80_CHECK_TIMEOUT=15s
+    volumes:
+      - /mnt/influxdb:/data
+    networks:
+      - apm
+  prometheus:
+    restart: always
+    image: prom/prometheus
+    deploy:
+     replicas: 1
+     restart_policy:
+      condition: on-failure
+    ports:
+      - "9090:9090"
+    volumes:
+      - /mnt/prometheus/data:/prometheus
+    configs:
+      - source: prometheus_yml
+        target: /etc/prometheus/prometheus.yml
+    networks:
+      - microservice
+      - apm
+    environment:     
+     - SERVICE_NAME=prometheus
+     - SERVICE_TAGS=apm
+     - SERVICE_REGION=DC1
+     - SERVICE_CHECK_INITIAL_STATUS=passing
+     - SERVICE_80_CHECK_HTTP=/healthcheck
+     - SERVICE_80_CHECK_INTERVAL=15s
+     - SERVICE_80_CHECK_TIMEOUT=15s
+  prometheus_node_exporter:
+    restart: always
+    image: quay.io/prometheus/node-exporter
+    deploy:
+     mode: global
+     restart_policy:
+      condition: on-failure
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro 
+      - /sys:/host/sys:ro 
+      - /:/rootfs:ro
+    networks:
+      - microservice
+      - apm
+    environment:     
+     - SERVICE_NAME=prometheus_node_exporter
+     - SERVICE_TAGS=apm
+     - SERVICE_REGION=DC1
+     - SERVICE_CHECK_INITIAL_STATUS=passing
+     - SERVICE_80_CHECK_HTTP=/healthcheck
+     - SERVICE_80_CHECK_INTERVAL=15s
+     - SERVICE_80_CHECK_TIMEOUT=15s
+  prometheus_rabbitmq_exporter:
+    restart: always
+    image: kbudde/rabbitmq-exporter
+    deploy:
+     replicas: 1
+     restart_policy:
+      condition: on-failure
+    ports:
+      - "9419:9419"    
+    environment:
+      - RABBIT_URL=http://localhost:15672
+      - RABBIT_USER=guest
+      - RABBIT_PASSWORD=guest      
+      - PUBLISH_PORT=9419
+      - SERVICE_NAME=prometheus_rabbitmq_exporter
+      - SERVICE_TAGS=apm
+      - SERVICE_REGION=DC1
+      - SERVICE_CHECK_INITIAL_STATUS=passing
+      - SERVICE_80_CHECK_HTTP=/healthcheck
+      - SERVICE_80_CHECK_INTERVAL=15s
+      - SERVICE_80_CHECK_TIMEOUT=15s
+    networks:
+      - microservice
+      - apm
+  prometheus_consul_exporter:
+    restart: always
+    image: prom/consul-exporter
+    deploy:
+     replicas: 1
+     restart_policy:
+      condition: on-failure
+    ports:
+      - "9107:9107"    
+    command: --consul.server=consul-node1:8500
+    networks:
+      - apm
+      - microservice
+    environment:     
+     - SERVICE_NAME=prometheus_consul_exporter
+     - SERVICE_TAGS=apm
+     - SERVICE_REGION=DC1
+     - SERVICE_CHECK_INITIAL_STATUS=passing
+     - SERVICE_80_CHECK_HTTP=/healthcheck
+     - SERVICE_80_CHECK_INTERVAL=15s
+     - SERVICE_80_CHECK_TIMEOUT=15s
+  prometheus_redis_exporter:
+    restart: always
+    image: oliver006/redis_exporter
+    deploy:
+     replicas: 1
+     restart_policy:
+      condition: on-failure
+    ports:
+      - "9121:9121"    
+    environment:
+      - REDIS_ADDR=localhost:6379
+      - REDIS_PASSWORD=
+      - SERVICE_NAME=prometheus_redis_exporter
+      - SERVICE_TAGS=apm
+      - SERVICE_REGION=DC1
+      - SERVICE_CHECK_INITIAL_STATUS=passing
+      - SERVICE_80_CHECK_HTTP=/healthcheck
+      - SERVICE_80_CHECK_INTERVAL=15s
+      - SERVICE_80_CHECK_TIMEOUT=15s
+    networks:
+      - microservice
+      - apm
+  prometheus_mongodb_exporter:
+    restart: always
+    image: eses/mongodb_exporter
+    deploy:
+     replicas: 1
+     restart_policy:
+      condition: on-failure
+    ports:
+      - "9104:9104"          
+    command: -mongodb.uri mongodb://user:password@localhost:27017/
+    networks:
+      - microservice
+      - apm
+    environment:     
+     - SERVICE_NAME=prometheus_mongodb_exporter
+     - SERVICE_TAGS=apm
+     - SERVICE_REGION=DC1
+     - SERVICE_CHECK_INITIAL_STATUS=passing
+     - SERVICE_80_CHECK_HTTP=/healthcheck
+     - SERVICE_80_CHECK_INTERVAL=15s
+     - SERVICE_80_CHECK_TIMEOUT=15s
+  prometheus_mssql_exporter:
+    restart: always
+    image: awaragi/prometheus-mssql-exporter
+    deploy:
+     replicas: 1
+     restart_policy:
+      condition: on-failure
+    ports:
+      - "4000:4000"    
+    environment:
+      - SERVER=localhost
+      - PORT=1433
+      - USERNAME=root
+      - PASSWORD=root
+      - DEBUG=app
+      - SERVICE_NAME=prometheus_mssql_exporter
+      - SERVICE_TAGS=apm
+      - SERVICE_REGION=DC1
+      - SERVICE_CHECK_INITIAL_STATUS=passing
+      - SERVICE_80_CHECK_HTTP=/healthcheck
+      - SERVICE_80_CHECK_INTERVAL=15s
+      - SERVICE_80_CHECK_TIMEOUT=15s
+    networks:
+      - microservice
+      - apm
+  fluent_es:
+    restart: always
+    image: yunlzheng/fluent-es
+    deploy:
+     mode: global
+     restart_policy:
+      condition: on-failure
+    stdin_open: true
+    tty: true
+    environment:
+      - FLUENTD_CONF=fluent.conf
+      - FLUENTD_OPT=
+      - SERVICE_NAME=fluent-es
+      - SERVICE_TAGS=apm
+      - SERVICE_REGION=DC1
+      - SERVICE_CHECK_INITIAL_STATUS=passing
+      - SERVICE_80_CHECK_HTTP=/healthcheck
+      - SERVICE_80_CHECK_INTERVAL=15s
+      - SERVICE_80_CHECK_TIMEOUT=15s
+    ports:
+      - "24224:24224/tcp"
+    labels:
+      description: 'fluent to elasitcsearch'
+    networks:
+      - apm
+    configs:
+      - source: fluentd_conf
+        target: /fluentd/etc/fluent.conf
+  jaeger-collector:
+    restart: always
+    image: jaegertracing/jaeger-collector
+    deploy:
+     replicas: 3
+     restart_policy:
+      condition: on-failure
+    ports:
+      - "14250:14250"
+      - "14267:14267"
+      - "14268:14268"
+      - "9411:9411"
+    networks:
+      - microservice
+      - apm
+    environment:     
+     - SERVICE_NAME=jaeger-collector
+     - SERVICE_TAGS=apm
+     - SERVICE_REGION=DC1
+     - SERVICE_CHECK_INITIAL_STATUS=passing
+     - SERVICE_80_CHECK_HTTP=/healthcheck
+     - SERVICE_80_CHECK_INTERVAL=15s
+     - SERVICE_80_CHECK_TIMEOUT=15s     
+     - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+     - SPAN_STORAGE_TYPE=elasticsearch
+     - ES_SERVER_URLS=http://elasticsearch-node1:9200
+  jaeger-query:
+    restart: always
+    image: jaegertracing/jaeger-query
+    deploy:
+     replicas: 1
+     restart_policy:
+      condition: on-failure
+    ports:
+      - "16686:16686/tcp"
+    networks:
+      - microservice
+      - apm
+    environment:     
+     - SERVICE_NAME=jaeger-query
+     - SERVICE_TAGS=apm
+     - SERVICE_REGION=DC1
+     - SERVICE_CHECK_INITIAL_STATUS=passing
+     - SERVICE_80_CHECK_HTTP=/healthcheck
+     - SERVICE_80_CHECK_INTERVAL=15s
+     - SERVICE_80_CHECK_TIMEOUT=15s     
+     - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+     - SPAN_STORAGE_TYPE=elasticsearch
+     - ES_SERVER_URLS=http://elasticsearch-node1:9200
+  jaeger-agent:
+    restart: always
+    image: jaegertracing/jaeger-agent
+    deploy:
+     mode: global
+     restart_policy:
+      condition: on-failure
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778/tcp"
+    networks:
+      - microservice
+      - apm
+    environment:     
+     - SERVICE_NAME=jaeger-agent
+     - SERVICE_TAGS=apm
+     - SERVICE_REGION=DC1
+     - SERVICE_CHECK_INITIAL_STATUS=passing
+     - SERVICE_80_CHECK_HTTP=/healthcheck
+     - SERVICE_80_CHECK_INTERVAL=15s
+     - SERVICE_80_CHECK_TIMEOUT=15s
+    depends_on:
+        - jaeger-collector
+    command: ["--reporter.type=grpc", "--reporter.grpc.host-port=jaeger-collector:14250"]
+  grafana:
+    restart: always
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    deploy:
+     replicas: 1
+     restart_policy:
+      condition: on-failure
+    volumes:
+      - /mnt/grafana:/var/lib/grafana
+    networks:
+      - apm
+      - microservice
+    environment:     
+     - SERVICE_NAME=grafana
+     - SERVICE_TAGS=apm
+     - SERVICE_REGION=DC1
+     - SERVICE_CHECK_INITIAL_STATUS=passing
+     - SERVICE_80_CHECK_HTTP=/healthcheck
+     - SERVICE_80_CHECK_INTERVAL=15s
+     - SERVICE_80_CHECK_TIMEOUT=15s
