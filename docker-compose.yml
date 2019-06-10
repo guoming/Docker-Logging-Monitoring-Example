@@ -9,8 +9,6 @@ networks:
 configs:
   prometheus_yml:
     file: ./prometheus/prometheus.yml
-  heartbeat_yml:
-    file: ./heartbeat/heartbeat.yml
   fluentd_conf:
     file: ./fluentd/fluent.conf
 
