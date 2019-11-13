@@ -302,7 +302,27 @@ services:
      - SERVICE_80_CHECK_TIMEOUT=15s
     depends_on:
         - jaeger-collector
-    command: ["--reporter.type=grpc", "--reporter.grpc.host-port=jaeger-collector:14250"]
+    command: ["--reporter.type=grpc", "--reporter.grpc.host-port=jaeger-collector:14250"]    
+  jaeger-spark-dependencies:
+    restart: always
+    image: jaegertracing/spark-dependencies
+    deploy:
+     mode: global
+     restart_policy:
+      condition: on-failure
+    networks:
+      - microservice
+      - apm
+    environment:     
+     - SERVICE_NAME=jaeger-spark-dependencies
+     - SERVICE_TAGS=apm
+     - SERVICE_REGION=DC1
+     - SERVICE_CHECK_INITIAL_STATUS=passing
+     - SERVICE_80_CHECK_HTTP=/healthcheck
+     - SERVICE_80_CHECK_INTERVAL=15s
+     - SERVICE_80_CHECK_TIMEOUT=15s
+     - STORAGE=elasticsearch      
+     - ES_NODES=http://elasticsearch-node1:9200    
   grafana:
     restart: always
     image: grafana/grafana:latest
