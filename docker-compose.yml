@@ -9,10 +9,31 @@ networks:
 configs:
   prometheus_yml:
     file: ./prometheus/prometheus.yml
-  fluentd_conf:
-    file: ./fluentd/fluent.conf
 
 services:
+  grafana:
+    restart: always
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    deploy:
+     replicas: 1
+     restart_policy:
+      condition: on-failure
+    volumes:
+      - ./grafana/:/etc/grafana/provisioning/    
+      - /media/sdb1/grafana:/var/lib/grafana      
+    networks:
+      - apm
+      - microservice
+    environment:     
+     - SERVICE_NAME=grafana
+     - SERVICE_TAGS=apm
+     - SERVICE_REGION=DC1
+     - SERVICE_CHECK_INITIAL_STATUS=passing
+     - SERVICE_80_CHECK_HTTP=/healthcheck
+     - SERVICE_80_CHECK_INTERVAL=15s
+     - SERVICE_80_CHECK_TIMEOUT=15s
   influxdb:
     restart: always
     image: tutum/influxdb:latest
@@ -35,7 +56,7 @@ services:
       - SERVICE_80_CHECK_INTERVAL=15s
       - SERVICE_80_CHECK_TIMEOUT=15s
     volumes:
-      - /mnt/influxdb:/data
+      - /media/sdb1/influxdb:/data
     networks:
       - apm
   prometheus:
@@ -48,13 +69,14 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - /mnt/prometheus/data:/prometheus
+      - /media/sdb1/prometheus/data:/prometheus
     configs:
       - source: prometheus_yml
         target: /etc/prometheus/prometheus.yml
     networks:
       - microservice
       - apm
+    command: --config.file=/etc/prometheus/prometheus.yml --web.enable-lifecycle --web.enable-admin-api
     environment:     
      - SERVICE_NAME=prometheus
      - SERVICE_TAGS=apm
@@ -63,6 +85,24 @@ services:
      - SERVICE_80_CHECK_HTTP=/healthcheck
      - SERVICE_80_CHECK_INTERVAL=15s
      - SERVICE_80_CHECK_TIMEOUT=15s
+  alertmanager:
+    image: prom/alertmanager:v0.16.0
+    ports:
+    - 9093:9093
+    volumes:
+    - ./alertmanager/:/etc/alertmanager/
+    - /media/sdb1/alertmanager/data:/alertmanager
+    command:
+    - '--config.file=/etc/alertmanager/alertmanager.yml'
+    - '--storage.path=/alertmanager'    
+    restart: always
+  webhook-dingtalk:
+    image: timonwong/prometheus-webhook-dingtalk:v0.3.0
+    ports:
+    - 8060:8060
+    command:
+    - '--ding.profile=main=https://oapi.dingtalk.com/robot/send?access_token=${DINGTALK_TOKEN}'
+    restart: always
   prometheus_node_exporter:
     restart: always
     image: quay.io/prometheus/node-exporter
@@ -200,34 +240,22 @@ services:
     networks:
       - microservice
       - apm
-  fluent_es:
-    restart: always
-    image: yunlzheng/fluent-es
-    deploy:
-     mode: global
-     restart_policy:
-      condition: on-failure
-    stdin_open: true
-    tty: true
+  prometheus_aliyun-exporter:
+    image: aylei/aliyun-exporter:0.3.1
+    volumes:
+    - ./prometheus/prometheus-aliyun-exporter/:/etc/aliyun-exporter
+    command:
+    - '-p'
+    - '9525'
+    - '-c'
+    - '/etc/aliyun-exporter/aliyun-exporter.yml'
     environment:
-      - FLUENTD_CONF=fluent.conf
-      - FLUENTD_OPT=
-      - SERVICE_NAME=fluent-es
-      - SERVICE_TAGS=apm
-      - SERVICE_REGION=DC1
-      - SERVICE_CHECK_INITIAL_STATUS=passing
-      - SERVICE_80_CHECK_HTTP=/healthcheck
-      - SERVICE_80_CHECK_INTERVAL=15s
-      - SERVICE_80_CHECK_TIMEOUT=15s
+    - ALIYUN_ACCESS_ID=LTAI4GHLWr9tqy63cmE1onsy
+    - ALIYUN_ACCESS_SECRET=orN3eQg5pKt0BALlz3Ly0njP1j74N5
+    - ALIYUN_REGION=${ALIYUN_REGION}
     ports:
-      - "24224:24224/tcp"
-    labels:
-      description: 'fluent to elasitcsearch'
-    networks:
-      - apm
-    configs:
-      - source: fluentd_conf
-        target: /fluentd/etc/fluent.conf
+    - 9525:9525
+    restart: always
   jaeger-collector:
     restart: always
     image: jaegertracing/jaeger-collector
@@ -253,7 +281,7 @@ services:
      - SERVICE_80_CHECK_TIMEOUT=15s     
      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
      - SPAN_STORAGE_TYPE=elasticsearch
-     - ES_SERVER_URLS=http://elasticsearch-node1:9200
+     - ES_SERVER_URLS=http://192.168.109.166:9200
   jaeger-query:
     restart: always
     image: jaegertracing/jaeger-query
@@ -276,7 +304,7 @@ services:
      - SERVICE_80_CHECK_TIMEOUT=15s     
      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
      - SPAN_STORAGE_TYPE=elasticsearch
-     - ES_SERVER_URLS=http://elasticsearch-node1:9200
+     - ES_SERVER_URLS=http://192.168.109.166:9200
   jaeger-agent:
     restart: always
     image: jaegertracing/jaeger-agent
@@ -302,46 +330,4 @@ services:
      - SERVICE_80_CHECK_TIMEOUT=15s
     depends_on:
         - jaeger-collector
-    command: ["--reporter.type=grpc", "--reporter.grpc.host-port=jaeger-collector:14250"]    
-  jaeger-spark-dependencies:
-    restart: always
-    image: jaegertracing/spark-dependencies
-    deploy:
-     mode: global
-     restart_policy:
-      condition: on-failure
-    networks:
-      - microservice
-      - apm
-    environment:     
-     - SERVICE_NAME=jaeger-spark-dependencies
-     - SERVICE_TAGS=apm
-     - SERVICE_REGION=DC1
-     - SERVICE_CHECK_INITIAL_STATUS=passing
-     - SERVICE_80_CHECK_HTTP=/healthcheck
-     - SERVICE_80_CHECK_INTERVAL=15s
-     - SERVICE_80_CHECK_TIMEOUT=15s
-     - STORAGE=elasticsearch      
-     - ES_NODES=http://elasticsearch-node1:9200    
-  grafana:
-    restart: always
-    image: grafana/grafana:latest
-    ports:
-      - "3000:3000"
-    deploy:
-     replicas: 1
-     restart_policy:
-      condition: on-failure
-    volumes:
-      - /mnt/grafana:/var/lib/grafana
-    networks:
-      - apm
-      - microservice
-    environment:     
-     - SERVICE_NAME=grafana
-     - SERVICE_TAGS=apm
-     - SERVICE_REGION=DC1
-     - SERVICE_CHECK_INITIAL_STATUS=passing
-     - SERVICE_80_CHECK_HTTP=/healthcheck
-     - SERVICE_80_CHECK_INTERVAL=15s
-     - SERVICE_80_CHECK_TIMEOUT=15s
+    command: ["--reporter.type=grpc", "--reporter.grpc.host-port=jaeger-collector:14250"]

@@ -2,12 +2,17 @@ global:
   scrape_interval: 15s
   scrape_timeout: 10s
   evaluation_interval: 15s
+
+rule_files:
+    - 'rules.yml'
+
 alerting:
   alertmanagers:
-  - static_configs:
-    - targets: []
-    scheme: http
-    timeout: 10s
+  - scheme: http
+    static_configs:
+    - targets:
+      - "localhost:9093"
+
 scrape_configs:
 - job_name: prometheus
   scrape_interval: 15s
@@ -17,7 +22,68 @@ scrape_configs:
   static_configs:
   - targets:
     - localhost:9090
-- job_name: overwrite
+- job_name: 'alertmanager'
+  scrape_interval: 15s
+  static_configs:
+    - targets: ['localhost:9093']
+- job_name: local-dev
+  metrics_path: /prometheus
   consul_sd_configs:
-  - server: 'consul-node1:8500'
-    services: ['prometheus_redis_exporter','prometheus_consul_exporter','prometheus_mongodb_exporter','prometheus_node_exporter','prometheus_rabbitmq_exporter','prometheus_mssql_exporter']
+  - server: '192.168.109.166:8500'
+    services: []
+    
+  relabel_configs:
+   - source_labels: [ '__meta_consul_service' ]
+     target_label:  'service'
+   - source_labels: [ '__meta_consul_health' ]
+     target_label:  'health'
+   - source_labels: [__meta_consul_tags]
+     regex: '.*dev.*'     
+     action: keep
+   - regex: __meta_consul_service_metadata_(.+)
+     action: labelmap
+- job_name: local-test
+  metrics_path: /prometheus
+  consul_sd_configs:
+  - server: '192.168.109.166:8500'
+    services: []
+  relabel_configs:
+   - source_labels: [ '__meta_consul_service' ]
+     target_label:  'service'
+   - source_labels: [ '__meta_consul_health' ]
+     target_label:  'health'
+   - source_labels: [__meta_consul_tags]
+     regex: '.*test.*'     
+     action: keep
+   - regex: __meta_consul_service_metadata_(.+)
+     action: labelmap
+- job_name: local-sbx
+  metrics_path: /prometheus
+  consul_sd_configs:
+  - server: '192.168.109.166:8500'
+    services: []
+  relabel_configs:
+   - source_labels: [ '__meta_consul_service' ]
+     target_label:  'service'
+   - source_labels: [ '__meta_consul_health' ]
+     target_label:  'health'
+   - source_labels: [__meta_consul_tags]
+     regex: '.*sbx.*'     
+     action: keep
+   - regex: __meta_consul_service_metadata_(.+)
+     action: labelmap
+- job_name: local-qas
+  metrics_path: /prometheus
+  consul_sd_configs:
+  - server: '192.168.109.166:8500'
+    services: []
+  relabel_configs:
+   - source_labels: [ '__meta_consul_service' ]
+     target_label:  'service'
+   - source_labels: [ '__meta_consul_health' ]
+     target_label:  'health'
+   - source_labels: [__meta_consul_tags]
+     regex: '.*qas.*'     
+     action: keep
+   - regex: __meta_consul_service_metadata_(.+)
+     action: labelmap
