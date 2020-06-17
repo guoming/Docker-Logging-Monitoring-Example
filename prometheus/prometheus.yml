@@ -11,7 +11,7 @@ alerting:
   - scheme: http
     static_configs:
     - targets:
-      - "alertmanager:9093"
+      - "prometheus-alertmanager:9093"
 
 scrape_configs:
 - job_name: prometheus
@@ -22,11 +22,25 @@ scrape_configs:
   static_configs:
   - targets:
     - prometheus:9090
-- job_name: 'alertmanager'
+- job_name: prometheus-alertmanager
   scrape_interval: 15s
   static_configs:
-    - targets: ['alertmanager:9093']
-- job_name: local-dev
+    - targets: ['prometheus-alertmanager:9093']
+- job_name: prometheus-exporter  
+  consul_sd_configs:
+  - server: '192.168.109.166:8500'
+    services: []    
+  relabel_configs:
+   - source_labels: [ '__meta_consul_service' ]
+     target_label:  'service'
+   - source_labels: [ '__meta_consul_health' ]
+     target_label:  'health'
+   - source_labels: [__meta_consul_service]
+     regex: '.*exporter.*'     
+     action: keep
+   - regex: __meta_consul_service_metadata_(.+)
+     action: labelmap
+- job_name: service-dev
   metrics_path: /prometheus
   consul_sd_configs:
   - server: '192.168.109.166:8500'
@@ -41,7 +55,7 @@ scrape_configs:
      action: keep
    - regex: __meta_consul_service_metadata_(.+)
      action: labelmap
-- job_name: local-test
+- job_name: service-test
   metrics_path: /prometheus
   consul_sd_configs:
   - server: '192.168.109.166:8500'
@@ -56,7 +70,7 @@ scrape_configs:
      action: keep
    - regex: __meta_consul_service_metadata_(.+)
      action: labelmap
-- job_name: local-sbx
+- job_name: service-sbx
   metrics_path: /prometheus
   consul_sd_configs:
   - server: '192.168.109.166:8500'
@@ -71,7 +85,7 @@ scrape_configs:
      action: keep
    - regex: __meta_consul_service_metadata_(.+)
      action: labelmap
-- job_name: local-qas
+- job_name: service-qas
   metrics_path: /prometheus
   consul_sd_configs:
   - server: '192.168.109.166:8500'

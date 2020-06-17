@@ -25,11 +25,6 @@ services:
     environment:     
      - SERVICE_NAME=grafana
      - SERVICE_TAGS=apm
-     - SERVICE_REGION=DC1
-     - SERVICE_CHECK_INITIAL_STATUS=passing
-     - SERVICE_80_CHECK_HTTP=/healthcheck
-     - SERVICE_80_CHECK_INTERVAL=15s
-     - SERVICE_80_CHECK_TIMEOUT=15s
   influxdb:
     restart: always
     image: tutum/influxdb:latest
@@ -46,11 +41,6 @@ services:
       - PRE_CREATE_DB="AppMetrics;"
       - SERVICE_NAME=influxdb
       - SERVICE_TAGS=apm
-      - SERVICE_REGION=DC1
-      - SERVICE_CHECK_INITIAL_STATUS=passing
-      - SERVICE_80_CHECK_HTTP=/healthcheck
-      - SERVICE_80_CHECK_INTERVAL=15s
-      - SERVICE_80_CHECK_TIMEOUT=15s
     volumes:
       - /media/sdb1/influxdb:/data
     networks:
@@ -74,17 +64,12 @@ services:
     environment:     
      - SERVICE_NAME=prometheus
      - SERVICE_TAGS=apm
-     - SERVICE_REGION=DC1
-     - SERVICE_CHECK_INITIAL_STATUS=passing
-     - SERVICE_80_CHECK_HTTP=/healthcheck
-     - SERVICE_80_CHECK_INTERVAL=15s
-     - SERVICE_80_CHECK_TIMEOUT=15s
-  alertmanager:
+  prometheus-alertmanager:
     image: prom/alertmanager:v0.16.0
     ports:
     - 9093:9093
     volumes:
-    - ./alertmanager/:/etc/alertmanager/
+    - ./prometheus-alertmanager/:/etc/alertmanager/
     - /media/sdb1/alertmanager/data:/alertmanager
     command:
     - '--config.file=/etc/alertmanager/alertmanager.yml'
@@ -92,7 +77,10 @@ services:
     restart: always
     networks:      
       - apm
-  webhook-dingtalk:
+    environment:     
+     - SERVICE_NAME=prometheus-alertmanager
+     - SERVICE_TAGS=apm
+  prometheus-webhook-dingtalk:
     image: timonwong/prometheus-webhook-dingtalk:v0.3.0
     ports:
     - 8060:8060
@@ -101,7 +89,10 @@ services:
     restart: always
     networks:      
       - apm
-  prometheus_node_exporter:
+    environment:     
+     - SERVICE_NAME=prometheus-webhook-dingtalk
+     - SERVICE_TAGS=apm
+  prometheus-node-exporter:
     restart: always
     image: quay.io/prometheus/node-exporter
     deploy:
@@ -118,14 +109,9 @@ services:
       - microservice
       - apm
     environment:     
-     - SERVICE_NAME=prometheus_node_exporter
+     - SERVICE_NAME=prometheus-node-exporter
      - SERVICE_TAGS=apm
-     - SERVICE_REGION=DC1
-     - SERVICE_CHECK_INITIAL_STATUS=passing
-     - SERVICE_80_CHECK_HTTP=/healthcheck
-     - SERVICE_80_CHECK_INTERVAL=15s
-     - SERVICE_80_CHECK_TIMEOUT=15s
-  prometheus_rabbitmq_exporter:
+  prometheus-rabbitmq-exporter:
     restart: always
     image: kbudde/rabbitmq-exporter
     deploy:
@@ -139,17 +125,12 @@ services:
       - RABBIT_USER=guest
       - RABBIT_PASSWORD=guest      
       - PUBLISH_PORT=9419
-      - SERVICE_NAME=prometheus_rabbitmq_exporter
+      - SERVICE_NAME=prometheus-rabbitmq-exporter
       - SERVICE_TAGS=apm
-      - SERVICE_REGION=DC1
-      - SERVICE_CHECK_INITIAL_STATUS=passing
-      - SERVICE_80_CHECK_HTTP=/healthcheck
-      - SERVICE_80_CHECK_INTERVAL=15s
-      - SERVICE_80_CHECK_TIMEOUT=15s
     networks:
       - microservice
       - apm
-  prometheus_consul_exporter:
+  prometheus-consul-exporter:
     restart: always
     image: prom/consul-exporter
     deploy:
@@ -163,14 +144,9 @@ services:
       - apm
       - microservice
     environment:     
-     - SERVICE_NAME=prometheus_consul_exporter
+     - SERVICE_NAME=prometheus-consul-exporter
      - SERVICE_TAGS=apm
-     - SERVICE_REGION=DC1
-     - SERVICE_CHECK_INITIAL_STATUS=passing
-     - SERVICE_80_CHECK_HTTP=/healthcheck
-     - SERVICE_80_CHECK_INTERVAL=15s
-     - SERVICE_80_CHECK_TIMEOUT=15s
-  prometheus_redis_exporter:
+  prometheus-redis-exporter:
     restart: always
     image: oliver006/redis_exporter
     deploy:
@@ -182,17 +158,12 @@ services:
     environment:
       - REDIS_ADDR=localhost:6379
       - REDIS_PASSWORD=
-      - SERVICE_NAME=prometheus_redis_exporter
+      - SERVICE_NAME=prometheus-redis-exporter
       - SERVICE_TAGS=apm
-      - SERVICE_REGION=DC1
-      - SERVICE_CHECK_INITIAL_STATUS=passing
-      - SERVICE_80_CHECK_HTTP=/healthcheck
-      - SERVICE_80_CHECK_INTERVAL=15s
-      - SERVICE_80_CHECK_TIMEOUT=15s
     networks:
       - microservice
       - apm
-  prometheus_mongodb_exporter:
+  prometheus-mongodb-exporter:
     restart: always
     image: eses/mongodb_exporter
     deploy:
@@ -206,14 +177,9 @@ services:
       - microservice
       - apm
     environment:     
-     - SERVICE_NAME=prometheus_mongodb_exporter
+     - SERVICE_NAME=prometheus-mongodb-exporter
      - SERVICE_TAGS=apm
-     - SERVICE_REGION=DC1
-     - SERVICE_CHECK_INITIAL_STATUS=passing
-     - SERVICE_80_CHECK_HTTP=/healthcheck
-     - SERVICE_80_CHECK_INTERVAL=15s
-     - SERVICE_80_CHECK_TIMEOUT=15s
-  prometheus_mssql_exporter:
+  prometheus-mssql-exporter:
     restart: always
     image: awaragi/prometheus-mssql-exporter
     deploy:
@@ -228,29 +194,26 @@ services:
       - USERNAME=root
       - PASSWORD=root
       - DEBUG=app
-      - SERVICE_NAME=prometheus_mssql_exporter
+      - SERVICE_NAME=prometheus-mssql-exporter
       - SERVICE_TAGS=apm
-      - SERVICE_REGION=DC1
-      - SERVICE_CHECK_INITIAL_STATUS=passing
-      - SERVICE_80_CHECK_HTTP=/healthcheck
-      - SERVICE_80_CHECK_INTERVAL=15s
-      - SERVICE_80_CHECK_TIMEOUT=15s
     networks:
       - microservice
       - apm
-  prometheus_aliyun-exporter:
-    image: aylei/aliyun-exporter:0.3.1
+  prometheus-aliyun-exporter:
+    image: aylei/aliyun-exporter:0.3.2-rc
     volumes:
-    - ./prometheus/prometheus-aliyun-exporter/:/etc/aliyun-exporter
+    - ./prometheus-exporter/prometheus-aliyun-exporter/:/etc/aliyun-exporter
     command:
     - '-p'
     - '9525'
     - '-c'
-    - '/etc/aliyun-exporter/aliyun-exporter.yml'
-    environment:
-    - ALIYUN_ACCESS_ID=LTAI4GHLWr9tqy63cmE1onsy
-    - ALIYUN_ACCESS_SECRET=orN3eQg5pKt0BALlz3Ly0njP1j74N5
-    - ALIYUN_REGION=${ALIYUN_REGION}
+    - '/etc/aliyun-exporter/aliyun-exporter.yml'  
+    environment:     
+     - SERVICE_NAME=prometheus-aliyun-exporter
+     - SERVICE_TAGS=apm 
+     - ALIYUN_ACCESS_ID=LTAI4GHLWr9tqy63cmE1onsy
+     - ALIYUN_ACCESS_SECRET=orN3eQg5pKt0BALlz3Ly0njP1j74N5
+     - ALIYUN_REGION=cn-hangzhou
     ports:
     - 9525:9525
     restart: always
@@ -274,11 +237,6 @@ services:
     environment:     
      - SERVICE_NAME=jaeger-collector
      - SERVICE_TAGS=apm
-     - SERVICE_REGION=DC1
-     - SERVICE_CHECK_INITIAL_STATUS=passing
-     - SERVICE_80_CHECK_HTTP=/healthcheck
-     - SERVICE_80_CHECK_INTERVAL=15s
-     - SERVICE_80_CHECK_TIMEOUT=15s     
      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
      - SPAN_STORAGE_TYPE=elasticsearch
      - ES_SERVER_URLS=http://elasticsearch:9200
@@ -296,12 +254,7 @@ services:
       - apm
     environment:     
      - SERVICE_NAME=jaeger-query
-     - SERVICE_TAGS=apm
-     - SERVICE_REGION=DC1
-     - SERVICE_CHECK_INITIAL_STATUS=passing
-     - SERVICE_80_CHECK_HTTP=/healthcheck
-     - SERVICE_80_CHECK_INTERVAL=15s
-     - SERVICE_80_CHECK_TIMEOUT=15s     
+     - SERVICE_TAGS=apm   
      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
      - SPAN_STORAGE_TYPE=elasticsearch
      - ES_SERVER_URLS=http://elasticsearch:9200
@@ -323,11 +276,6 @@ services:
     environment:     
      - SERVICE_NAME=jaeger-agent
      - SERVICE_TAGS=apm
-     - SERVICE_REGION=DC1
-     - SERVICE_CHECK_INITIAL_STATUS=passing
-     - SERVICE_80_CHECK_HTTP=/healthcheck
-     - SERVICE_80_CHECK_INTERVAL=15s
-     - SERVICE_80_CHECK_TIMEOUT=15s
     depends_on:
         - jaeger-collector
     command: ["--reporter.type=grpc", "--reporter.grpc.host-port=jaeger-collector:14250"]

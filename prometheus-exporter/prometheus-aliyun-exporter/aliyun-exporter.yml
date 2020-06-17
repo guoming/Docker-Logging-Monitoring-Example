@@ -1,5 +1,7 @@
 credential:
   region_id: cn-hangzhou
+  access_key_id: LTAI4GHLWr9tqy63cmE1onsy # required
+  access_key_secret: orN3eQg5pKt0BALlz3Ly0njP1j74N5 # required 
 
 metrics:
   acs_ecs_dashboard:
@@ -258,9 +260,5 @@ metrics:
   - name: SingleNodeQPS
     period: 300
 
-info_metrics:
-- ecs
-- rds
-- redis
-- slb
-- -mongodb
+#info_metrics:
+#- ecs
