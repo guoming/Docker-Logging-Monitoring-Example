@@ -44,6 +44,7 @@ services:
     volumes:
       - /media/sdb1/influxdb:/data
     networks:
+      - microservice
       - apm
   prometheus:
     restart: always
@@ -76,6 +77,7 @@ services:
     - '--storage.path=/alertmanager'    
     restart: always
     networks:      
+      - microservice
       - apm
     environment:     
      - SERVICE_NAME=prometheus-alertmanager
@@ -88,6 +90,7 @@ services:
     - '--ding.profile=main=https://oapi.dingtalk.com/robot/send?access_token=${DINGTALK_TOKEN}'
     restart: always
     networks:      
+      - microservice
       - apm
     environment:     
      - SERVICE_NAME=prometheus-webhook-dingtalk
@@ -179,6 +182,17 @@ services:
     environment:     
      - SERVICE_NAME=prometheus-mongodb-exporter
      - SERVICE_TAGS=apm
+  prometheus-elasticsearch_exporter:
+    image: justwatch/elasticsearch_exporter:1.1.0
+    command:
+     - '--es.uri=http://elasticsearch:9200'    
+    restart: always
+    networks:
+      - microservice
+      - apm
+    environment:     
+     - SERVICE_NAME=prometheus-elasticsearch-exporter
+     - SERVICE_TAGS=apm
   prometheus-mssql-exporter:
     restart: always
     image: awaragi/prometheus-mssql-exporter
@@ -205,7 +219,7 @@ services:
     - ./prometheus-exporter/prometheus-aliyun-exporter/:/etc/aliyun-exporter
     command:
     - '-p'
-    - '9525'
+    - '9522'
     - '-c'
     - '/etc/aliyun-exporter/aliyun-exporter.yml'  
     environment:     
@@ -215,9 +229,10 @@ services:
      - ALIYUN_ACCESS_SECRET=orN3eQg5pKt0BALlz3Ly0njP1j74N5
      - ALIYUN_REGION=cn-hangzhou
     ports:
-    - 9525:9525
+    - 9522:9522
     restart: always
     networks:      
+      - microservice
       - apm
   jaeger-collector:
     restart: always

@@ -24,9 +24,12 @@ scrape_configs:
     - prometheus:9090
 - job_name: prometheus-alertmanager
   scrape_interval: 15s
+  scrape_timeout: 10s
   static_configs:
     - targets: ['prometheus-alertmanager:9093']
 - job_name: prometheus-exporter  
+  scrape_interval: 65s
+  scrape_timeout: 60s
   consul_sd_configs:
   - server: '192.168.109.166:8500'
     services: []    
