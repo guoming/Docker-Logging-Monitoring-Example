@@ -16,7 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1548321517297,
+  "id": 216,
+  "iteration": 1594776743965,
   "links": [],
   "panels": [
     {
@@ -54,6 +55,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "postfix": "<br>ECS Alerts</br>",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -139,6 +141,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -224,6 +227,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -309,6 +313,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -355,20 +360,23 @@
     },
     {
       "columns": [],
+      "datasource": "Prometheus",
+      "description": "",
       "fontSize": "100%",
       "gridPos": {
-        "h": 7,
-        "w": 12,
+        "h": 15,
+        "w": 24,
         "x": 0,
         "y": 3
       },
-      "id": 2,
+      "id": 16,
       "links": [],
-      "pageSize": null,
+      "options": {},
+      "pageSize": 10000,
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 0,
+        "col": 18,
         "desc": true
       },
       "styles": [
@@ -379,7 +387,7 @@
           "type": "hidden"
         },
         {
-          "alias": "",
+          "alias": "实例Id",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -389,7 +397,6 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "link": true,
-          "linkTargetBlank": false,
           "linkTooltip": "detail view",
           "linkUrl": "/d/Alxt_FEik/ecs-detail?orgId=1&var-instanceId=${__cell}",
           "mappingType": 1,
@@ -399,8 +406,8 @@
           "unit": "short"
         },
         {
-          "alias": "",
-          "colorMode": "row",
+          "alias": "CPU %",
+          "colorMode": "cell",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
             "rgba(237, 129, 40, 0.89)",
@@ -409,106 +416,17 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "Value",
+          "pattern": "Value #A",
           "thresholds": [
-            "80",
-            "95"
+            "60",
+            "80"
           ],
           "type": "number",
-          "unit": "short"
+          "unit": "percent"
         },
         {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "HostName",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        }
-      ],
-      "targets": [
-        {
-          "expr": "(avg_over_time(aliyun_acs_ecs_dashboard_CPUUtilization[$interval]) > 80) * on (instanceId) group_left(VpcAttributes,HostName,InnerIpAddress) \nlabel_replace(aliyun_meta_ecs_info,\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
-          "format": "table",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "title": "CPU Pressure",
-      "transform": "table",
-      "type": "table"
-    },
-    {
-      "columns": [],
-      "fontSize": "100%",
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 3
-      },
-      "id": 3,
-      "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 8,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "hidden"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": true,
-          "linkTargetBlank": false,
-          "linkTooltip": "detail view",
-          "linkUrl": "/d/Alxt_FEik/ecs-detail?orgId=1&var-instanceId=${__cell}",
-          "mappingType": 1,
-          "pattern": "instanceId",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": "row",
+          "alias": "内存 %",
+          "colorMode": "cell",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
             "rgba(237, 129, 40, 0.89)",
@@ -517,12 +435,185 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "Value",
+          "pattern": "Value #B",
           "thresholds": [
-            "95",
-            "99"
+            "60",
+            "80"
           ],
           "type": "number",
+          "unit": "percent"
+        },
+        {
+          "alias": "Load",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Value #D",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "InternetOut",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Value #E",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Connections",
+          "colorMode": "cell",
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Value #F",
+          "thresholds": [
+            "3000",
+            "5000"
+          ],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "系统类型",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "OSType",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "区域Id",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "RegionId",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "服务器实例名称",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "InstanceName",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "计费类型",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "InternetChargeType",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short",
+          "valueMaps": [
+            {
+              "text": "按量付费",
+              "value": "PayByTraffic"
+            },
+            {
+              "text": "预付费",
+              "value": "PayByBandwidth"
+            }
+          ]
+        },
+        {
+          "alias": "Cpu",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Cpu",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "内存",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 0,
+          "mappingType": 1,
+          "pattern": "Memory",
+          "thresholds": [],
+          "type": "number",
+          "unit": "mbytes"
+        },
+        {
+          "alias": "阿里云账号",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "userId",
+          "thresholds": [],
+          "type": "string",
           "unit": "short"
         },
         {
@@ -536,20 +627,6 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "HostName",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
           "pattern": "/.*/",
           "thresholds": [],
           "type": "hidden",
@@ -558,33 +635,53 @@
       ],
       "targets": [
         {
-          "expr": "(avg_over_time(aliyun_acs_ecs_dashboard_memory_usedutilization[$interval]) > 95) * on (instanceId) group_left(VpcAttributes,HostName,InnerIpAddress) \nlabel_replace(aliyun_meta_ecs_info,\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
+          "expr": "(avg_over_time(aliyun_acs_ecs_dashboard_CPUUtilization{}[$interval])) * on (instanceId,instance) group_left(HostName,InnerIpAddress,PublicIpAddress,RegionId,InstanceName,OSType,OSName,CreationTime,ExpiredTime,InternetChargeType,Cpu,Memory,userId) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\") >=$threshold",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
           "refId": "A"
+        },
+        {
+          "expr": "(avg_over_time(aliyun_acs_ecs_dashboard_memory_usedutilization{}[$interval])) * on (instanceId,instance) group_left(HostName,InnerIpAddress,PublicIpAddress,RegionId,InstanceName,OSType,OSName,CreationTime,ExpiredTime,InternetChargeType,Cpu,Memory,userId) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")   >=$threshold",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "intervalFactor": 1,
+          "refId": "B"
+        },
+        {
+          "expr": "(avg_over_time(aliyun_acs_ecs_dashboard_net_tcpconnection{state=\"TCP_TOTAL\"}[$interval])) * on (instanceId,instance) group_left(HostName,InnerIpAddress,PublicIpAddress,RegionId,InstanceName,OSType,OSName,CreationTime,ExpiredTime,InternetChargeType,Cpu,Memory,userId) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "F"
         }
       ],
-      "title": "Memory Pressure",
+      "title": "Overview",
       "transform": "table",
       "type": "table"
     },
     {
       "columns": [],
+      "datasource": "Prometheus",
+      "description": "",
       "fontSize": "100%",
       "gridPos": {
-        "h": 7,
-        "w": 12,
+        "h": 21,
+        "w": 16,
         "x": 0,
-        "y": 10
+        "y": 18
       },
-      "id": 5,
+      "id": 18,
       "links": [],
-      "pageSize": null,
+      "options": {},
+      "pageSize": 10000,
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 8,
+        "col": 6,
         "desc": true
       },
       "styles": [
@@ -595,7 +692,7 @@
           "type": "hidden"
         },
         {
-          "alias": "",
+          "alias": "实例Id",
           "colorMode": null,
           "colors": [
             "rgba(245, 54, 54, 0.9)",
@@ -614,8 +711,8 @@
           "unit": "short"
         },
         {
-          "alias": "",
-          "colorMode": "row",
+          "alias": "磁盘使用率",
+          "colorMode": "cell",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
             "rgba(237, 129, 40, 0.89)",
@@ -626,9 +723,89 @@
           "mappingType": 1,
           "pattern": "Value",
           "thresholds": [
-            "10",
-            "20"
+            "50",
+            "80"
           ],
+          "type": "number",
+          "unit": "percent"
+        },
+        {
+          "alias": "系统类型",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "OSType",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "区域Id",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "RegionId",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "服务器实例名称",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "InstanceName",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "阿里云账号",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "userId",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "device",
+          "thresholds": [],
           "type": "number",
           "unit": "short"
         },
@@ -643,20 +820,6 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "HostName",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
           "pattern": "/.*/",
           "thresholds": [],
           "type": "hidden",
@@ -665,344 +828,439 @@
       ],
       "targets": [
         {
-          "expr": "(avg_over_time(aliyun_acs_ecs_dashboard_load_5m[$interval]) > 10) * on (instanceId) group_left(VpcAttributes,HostName,InnerIpAddress) \nlabel_replace(aliyun_meta_ecs_info,\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
+          "expr": "(aliyun_acs_ecs_dashboard_diskusage_utilization{}) * on (instanceId,instance) group_left(HostName,InnerIpAddress,PublicIpAddress,RegionId,InstanceName,OSType,OSName,CreationTime,ExpiredTime,InternetChargeType,Cpu,Memory,userId) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")>$threshold",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
           "refId": "A"
         }
       ],
-      "title": "Load Pressure",
+      "title": "ECS磁盘使用情况",
       "transform": "table",
       "type": "table"
     },
     {
-      "columns": [],
-      "fontSize": "100%",
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                90
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "last"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "24h",
+        "frequency": "1h",
+        "handler": 1,
+        "message": "阿里云ECS磁盘使用率 90%",
+        "name": "阿里云ECS磁盘使用率 alert",
+        "noDataState": "ok",
+        "notifications": [
+          {
+            "uid": "Vn9yrgRWz"
+          }
+        ]
+      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "",
+      "fill": 1,
       "gridPos": {
         "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 10
+        "w": 8,
+        "x": 16,
+        "y": 18
       },
-      "id": 6,
+      "id": 20,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
       "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 8,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "hidden"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": true,
-          "linkTooltip": "detail view",
-          "linkUrl": "/d/Alxt_FEik/ecs-detail?orgId=1&var-instanceId=${__cell}",
-          "mappingType": 1,
-          "pattern": "instanceId",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": "row",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value",
-          "thresholds": [
-            "90",
-            "95"
-          ],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "HostName",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        }
-      ],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
       "targets": [
         {
-          "expr": "(avg_over_time(aliyun_acs_ecs_dashboard_diskusage_utilization[$interval]) > 90) * on (instanceId) group_left(VpcAttributes,HostName,InnerIpAddress) \nlabel_replace(aliyun_meta_ecs_info,\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
-          "format": "table",
-          "instant": true,
+          "expr": "(aliyun_acs_ecs_dashboard_diskusage_utilization{}) * on (instanceId,instance) group_left(HostName,InnerIpAddress,PublicIpAddress,RegionId,InstanceName,OSType,OSName,CreationTime,ExpiredTime,InternetChargeType,Cpu,Memory,userId) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")>=90",
+          "format": "time_series",
+          "instant": false,
           "intervalFactor": 1,
+          "legendFormat": "{{InstanceName}} {{device}}",
           "refId": "A"
         }
       ],
-      "title": "Disk Pressure",
-      "transform": "table",
-      "type": "table"
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 90,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "阿里云ECS磁盘使用率",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
-      "columns": [],
-      "fontSize": "100%",
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                95
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "last"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "阿里云ECS内存使用率 超过95%",
+        "name": "阿里云ECS内存使用率 alert",
+        "noDataState": "ok",
+        "notifications": [
+          {
+            "uid": "Vn9yrgRWz"
+          }
+        ]
+      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "",
+      "fill": 1,
       "gridPos": {
         "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 17
+        "w": 8,
+        "x": 16,
+        "y": 25
       },
-      "id": 4,
+      "id": 23,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
       "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 9,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "hidden"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": true,
-          "linkTooltip": "detail view",
-          "linkUrl": "/d/Alxt_FEik/ecs-detail?orgId=1&var-instanceId=${__cell}",
-          "mappingType": 1,
-          "pattern": "instanceId",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": "row",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value",
-          "thresholds": [
-            "2000",
-            "4000"
-          ],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "HostName",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        }
-      ],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
       "targets": [
         {
-          "expr": "(avg_over_time(aliyun_acs_ecs_dashboard_net_tcpconnection{state=\"TCP_TOTAL\"}[10m]) > 1000) * on (instanceId) group_left(VpcAttributes,HostName,InnerIpAddress) \nlabel_replace(aliyun_meta_ecs_info,\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
-          "format": "table",
-          "instant": true,
+          "expr": "(aliyun_acs_ecs_dashboard_memory_usedutilization{}) * on (instanceId,instance) group_left(HostName,InnerIpAddress,PublicIpAddress,RegionId,InstanceName,OSType,OSName,CreationTime,ExpiredTime,InternetChargeType,Cpu,Memory,userId) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")>=80",
+          "format": "time_series",
+          "instant": false,
           "intervalFactor": 1,
+          "legendFormat": "{{RegionId}}:{{InstanceName}}",
           "refId": "A"
         }
       ],
-      "title": "Too Many Connections",
-      "transform": "table",
-      "type": "table"
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 95,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "阿里云ECS内存使用率",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
-      "columns": [],
-      "fontSize": "100%",
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                90
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "last"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "阿里云ECS CPU使用率 90%",
+        "name": "阿里云ECS CPU使用率 alert",
+        "noDataState": "ok",
+        "notifications": [
+          {
+            "uid": "Vn9yrgRWz"
+          }
+        ]
+      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "",
+      "fill": 1,
       "gridPos": {
         "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 17
+        "w": 8,
+        "x": 16,
+        "y": 32
       },
-      "id": 7,
+      "id": 21,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
       "links": [],
-      "pageSize": null,
-      "scroll": true,
-      "showHeader": true,
-      "sort": {
-        "col": 8,
-        "desc": true
-      },
-      "styles": [
-        {
-          "alias": "Time",
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "pattern": "Time",
-          "type": "hidden"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "link": true,
-          "linkTooltip": "detail view",
-          "linkUrl": "/d/Alxt_FEik/ecs-detail?orgId=1&var-instanceId=${__cell}",
-          "mappingType": 1,
-          "pattern": "instanceId",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": "row",
-          "colors": [
-            "rgba(50, 172, 45, 0.97)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(245, 54, 54, 0.9)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "Value",
-          "thresholds": [
-            "10000000",
-            " 50000000"
-          ],
-          "type": "number",
-          "unit": "Bps"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "dateFormat": "YYYY-MM-DD HH:mm:ss",
-          "decimals": 2,
-          "mappingType": 1,
-          "pattern": "HostName",
-          "thresholds": [],
-          "type": "number",
-          "unit": "short"
-        },
-        {
-          "alias": "",
-          "colorMode": null,
-          "colors": [
-            "rgba(245, 54, 54, 0.9)",
-            "rgba(237, 129, 40, 0.89)",
-            "rgba(50, 172, 45, 0.97)"
-          ],
-          "decimals": 2,
-          "pattern": "/.*/",
-          "thresholds": [],
-          "type": "hidden",
-          "unit": "short"
-        }
-      ],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
       "targets": [
         {
-          "expr": "(avg_over_time(aliyun_acs_ecs_dashboard_InternetOut[10m]) > 10 * 1024 * 1024) * on (instanceId) group_left(VpcAttributes,HostName,InnerIpAddress) \nlabel_replace(aliyun_meta_ecs_info,\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
-          "format": "table",
-          "instant": true,
+          "expr": "(aliyun_acs_ecs_dashboard_CPUUtilization{}) * on (instanceId,instance) group_left(HostName,InnerIpAddress,PublicIpAddress,RegionId,InstanceName,OSType,OSName,CreationTime,ExpiredTime,InternetChargeType,Cpu,Memory,userId) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")>=50",
+          "format": "time_series",
+          "instant": false,
           "intervalFactor": 1,
+          "legendFormat": "{{RegionId}}:{{InstanceName}}",
           "refId": "A"
         }
       ],
-      "title": "Abnormal Network IO",
-      "transform": "table",
-      "type": "table"
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 90,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "阿里云ECS CPU使用率",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
-  "schemaVersion": 16,
+  "refresh": false,
+  "schemaVersion": 18,
   "style": "dark",
   "tags": [
-    "ECS",
-    "Overview"
+    "ALIYUN",
+    "Prometheus",
+    "ECS"
   ],
   "templating": {
     "list": [
@@ -1011,15 +1269,15 @@
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
-          "text": "1m",
-          "value": "1m"
+          "text": "10m",
+          "value": "10m"
         },
         "hide": 0,
         "label": null,
         "name": "interval",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "1m",
             "value": "1m"
           },
@@ -1029,7 +1287,7 @@
             "value": "5m"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "10m",
             "value": "10m"
           },
@@ -1057,71 +1315,54 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
+          "text": "0",
+          "value": "0"
         },
-        "datasource": "Prometheus",
-        "definition": "label_values(aliyun_meta_ecs_info, ZoneId)",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": null,
-        "multi": true,
-        "name": "zone",
+        "multi": false,
+        "name": "threshold",
         "options": [
           {
+            "selected": false,
+            "text": "0",
+            "value": "0"
+          },
+          {
+            "selected": false,
+            "text": "50",
+            "value": "50"
+          },
+          {
+            "selected": false,
+            "text": "60",
+            "value": "60"
+          },
+          {
+            "selected": false,
+            "text": "70",
+            "value": "70"
+          },
+          {
             "selected": true,
-            "text": "All",
-            "value": "$__all"
+            "text": "80",
+            "value": "80"
           },
           {
             "selected": false,
-            "text": "cn-hangzhou-b",
-            "value": "cn-hangzhou-b"
-          },
-          {
-            "selected": false,
-            "text": "cn-hangzhou-d",
-            "value": "cn-hangzhou-d"
-          },
-          {
-            "selected": false,
-            "text": "cn-hangzhou-c",
-            "value": "cn-hangzhou-c"
-          },
-          {
-            "selected": false,
-            "text": "cn-hangzhou-e",
-            "value": "cn-hangzhou-e"
-          },
-          {
-            "selected": false,
-            "text": "cn-hangzhou-f",
-            "value": "cn-hangzhou-f"
-          },
-          {
-            "selected": false,
-            "text": "cn-hangzhou-g",
-            "value": "cn-hangzhou-g"
+            "text": "90",
+            "value": "90"
           }
         ],
-        "query": "label_values(aliyun_meta_ecs_info, ZoneId)",
-        "refresh": 0,
-        "regex": "",
+        "query": "0,50,60,70,80,90",
         "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "custom"
       }
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -1152,5 +1393,5 @@
   "timezone": "",
   "title": "ECS Overview",
   "uid": "1wdHfglmk",
-  "version": 21
+  "version": 140
 }

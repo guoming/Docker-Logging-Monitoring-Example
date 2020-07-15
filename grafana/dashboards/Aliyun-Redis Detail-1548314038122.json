@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 13,
-  "iteration": 1548314018854,
+  "id": 219,
+  "iteration": 1594776948527,
   "links": [
     {
       "icon": "external link",
@@ -30,6 +30,7 @@
   "panels": [
     {
       "columns": [],
+      "datasource": "Prometheus",
       "fontSize": "120%",
       "gridPos": {
         "h": 3,
@@ -39,6 +40,7 @@
       },
       "id": 4,
       "links": [],
+      "options": {},
       "pageSize": 1,
       "scroll": false,
       "showHeader": true,
@@ -231,6 +233,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -252,6 +255,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -314,6 +318,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -335,6 +340,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -397,6 +403,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -418,6 +425,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -480,6 +488,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -501,6 +510,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -571,6 +581,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -592,6 +603,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -662,6 +674,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -683,6 +696,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -741,20 +755,20 @@
       }
     }
   ],
-  "schemaVersion": 16,
+  "schemaVersion": 18,
   "style": "dark",
   "tags": [
-    "Redis",
-    "Detail"
+    "Prometheus",
+    "ALIYUN",
+    "REDIS"
   ],
   "templating": {
     "list": [
       {
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "dcs-redis",
-          "value": "dcs-redis"
+          "text": "lms-us",
+          "value": "lms-us"
         },
         "datasource": "Prometheus",
         "definition": "label_values(aliyun_meta_redis_info,InstanceName)",
@@ -763,185 +777,9 @@
         "label": null,
         "multi": false,
         "name": "hostname",
-        "options": [
-          {
-            "selected": false,
-            "text": "diyrender-client-redis",
-            "value": "diyrender-client-redis"
-          },
-          {
-            "selected": false,
-            "text": "construction-request",
-            "value": "construction-request"
-          },
-          {
-            "selected": false,
-            "text": "cadprocess",
-            "value": "cadprocess"
-          },
-          {
-            "selected": false,
-            "text": "imageretrieve-cache",
-            "value": "imageretrieve-cache"
-          },
-          {
-            "selected": false,
-            "text": "site-filter-cache",
-            "value": "site-filter-cache"
-          },
-          {
-            "selected": false,
-            "text": "deploy-broker-beta",
-            "value": "deploy-broker-beta"
-          },
-          {
-            "selected": false,
-            "text": "audit-redis",
-            "value": "audit-redis"
-          },
-          {
-            "selected": false,
-            "text": "koolvr",
-            "value": "koolvr"
-          },
-          {
-            "selected": false,
-            "text": "ir-gatewayservice",
-            "value": "ir-gatewayservice"
-          },
-          {
-            "selected": false,
-            "text": "render-task-redis",
-            "value": "render-task-redis"
-          },
-          {
-            "selected": false,
-            "text": "pano-cache-redis",
-            "value": "pano-cache-redis"
-          },
-          {
-            "selected": false,
-            "text": "message",
-            "value": "message"
-          },
-          {
-            "selected": false,
-            "text": "behavior-redis",
-            "value": "behavior-redis"
-          },
-          {
-            "selected": true,
-            "text": "dcs-redis",
-            "value": "dcs-redis"
-          },
-          {
-            "selected": false,
-            "text": "render-mpqueue",
-            "value": "render-mpqueue"
-          },
-          {
-            "selected": false,
-            "text": "render-cache-redis",
-            "value": "render-cache-redis"
-          },
-          {
-            "selected": false,
-            "text": "representation-service",
-            "value": "representation-service"
-          },
-          {
-            "selected": false,
-            "text": "ask-redis-4.0",
-            "value": "ask-redis-4.0"
-          },
-          {
-            "selected": false,
-            "text": "userbiz",
-            "value": "userbiz"
-          },
-          {
-            "selected": false,
-            "text": "search01",
-            "value": "search01"
-          },
-          {
-            "selected": false,
-            "text": "floorplan-cache",
-            "value": "floorplan-cache"
-          },
-          {
-            "selected": false,
-            "text": "searchapicache01",
-            "value": "searchapicache01"
-          },
-          {
-            "selected": false,
-            "text": "project-storage",
-            "value": "project-storage"
-          },
-          {
-            "selected": false,
-            "text": "sprite-redis",
-            "value": "sprite-redis"
-          },
-          {
-            "selected": false,
-            "text": "diytoolservice-redis",
-            "value": "diytoolservice-redis"
-          },
-          {
-            "selected": false,
-            "text": "site-redis-session03",
-            "value": "site-redis-session03"
-          },
-          {
-            "selected": false,
-            "text": "site-redis-session02",
-            "value": "site-redis-session02"
-          },
-          {
-            "selected": false,
-            "text": "site-redis-session04",
-            "value": "site-redis-session04"
-          },
-          {
-            "selected": false,
-            "text": "site-redis-session",
-            "value": "site-redis-session"
-          },
-          {
-            "selected": false,
-            "text": "deco-redis",
-            "value": "deco-redis"
-          },
-          {
-            "selected": false,
-            "text": "diy-cache",
-            "value": "diy-cache"
-          },
-          {
-            "selected": false,
-            "text": "site-cache-4.0",
-            "value": "site-cache-4.0"
-          },
-          {
-            "selected": false,
-            "text": "kujiale-site-01",
-            "value": "kujiale-site-01"
-          },
-          {
-            "selected": false,
-            "text": "drs-redis",
-            "value": "drs-redis"
-          },
-          {
-            "selected": false,
-            "text": "diyservice-kvstore",
-            "value": "diyservice-kvstore"
-          }
-        ],
+        "options": [],
         "query": "label_values(aliyun_meta_redis_info,InstanceName)",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -954,8 +792,9 @@
       {
         "allValue": null,
         "current": {
-          "text": "r-bp1389409ea32e44",
-          "value": "r-bp1389409ea32e44"
+          "selected": true,
+          "text": "r-rj92vq3eunxueq3fv6",
+          "value": "r-rj92vq3eunxueq3fv6"
         },
         "datasource": "Prometheus",
         "definition": "label_values(aliyun_meta_redis_info{InstanceName=\"$hostname\"},UserName)",
@@ -967,8 +806,8 @@
         "options": [
           {
             "selected": true,
-            "text": "r-bp1389409ea32e44",
-            "value": "r-bp1389409ea32e44"
+            "text": "r-rj92vq3eunxueq3fv6",
+            "value": "r-rj92vq3eunxueq3fv6"
           }
         ],
         "query": "label_values(aliyun_meta_redis_info{InstanceName=\"$hostname\"},UserName)",
@@ -1016,5 +855,5 @@
   "timezone": "",
   "title": "Redis Detail",
   "uid": "5xcn_zlik",
-  "version": 4
+  "version": 5
 }

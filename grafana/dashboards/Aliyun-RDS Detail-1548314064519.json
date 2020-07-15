@@ -18,8 +18,8 @@
   "editable": true,
   "gnetId": 9461,
   "graphTooltip": 0,
-  "id": 12,
-  "iteration": 1548314057360,
+  "id": 215,
+  "iteration": 1594776723208,
   "links": [
     {
       "icon": "external link",
@@ -32,6 +32,7 @@
   "panels": [
     {
       "columns": [],
+      "datasource": "Prometheus",
       "fontSize": "120%",
       "gridPos": {
         "h": 3,
@@ -41,6 +42,7 @@
       },
       "id": 10,
       "links": [],
+      "options": {},
       "pageSize": 1,
       "scroll": false,
       "showHeader": true,
@@ -217,6 +219,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -238,6 +241,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -248,14 +252,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "aliyun_acs_rds_dashboard_MySQL_NetworkInNew{instanceId=\"$instanceId\"}",
+          "expr": "(aliyun_acs_rds_dashboard_MySQL_NetworkInNew{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_rds_info, \"instanceId\", \"$1\", \"DBInstanceId\", \"(.*)\") \n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "In",
           "refId": "A"
         },
         {
-          "expr": "-aliyun_acs_rds_dashboard_MySQL_NetworkOutNew{instanceId=\"$instanceId\"}",
+          "expr": "(-aliyun_acs_rds_dashboard_MySQL_NetworkOutNew{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_rds_info{},\"instanceId\",\"$1\",\"DBInstanceId\",\"(.*)\")",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Out",
@@ -308,6 +312,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 5,
@@ -329,6 +334,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -339,7 +345,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "aliyun_acs_rds_dashboard_MySQL_ActiveSessions{instanceId=\"$instanceId\"}",
+          "expr": "(aliyun_acs_rds_dashboard_MySQL_ActiveSessions{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_rds_info{},\"instanceId\",\"$1\",\"DBInstanceId\",\"(.*)\")\n\n",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -418,6 +424,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 0.5,
       "points": false,
@@ -428,7 +435,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "aliyun_acs_rds_dashboard_CpuUsage{instanceId=~\"$instanceId\"}",
+          "expr": "\n(aliyun_acs_rds_dashboard_CpuUsage{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_rds_info{},\"instanceId\",\"$1\",\"DBInstanceId\",\"(.*)\")\n\n",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -436,15 +443,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": [
-        {
-          "colorMode": "critical",
-          "fill": false,
-          "line": false,
-          "op": "gt",
-          "value": 80
-        }
-      ],
+      "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
@@ -516,6 +515,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 0.5,
       "points": false,
@@ -526,7 +526,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "aliyun_acs_rds_dashboard_MemoryUsage{instanceId=~\"$instanceId\"}",
+          "expr": "\n\n(aliyun_acs_rds_dashboard_MemoryUsage{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_rds_info{},\"instanceId\",\"$1\",\"DBInstanceId\",\"(.*)\")\n\n",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -614,6 +614,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 0.5,
       "points": false,
@@ -624,7 +625,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "aliyun_acs_rds_dashboard_IOPSUsage{instanceId=~\"$instanceId\"}",
+          "expr": "\n\n\n(aliyun_acs_rds_dashboard_IOPSUsage{instanceId=~\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_rds_info{},\"instanceId\",\"$1\",\"DBInstanceId\",\"(.*)\")",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -712,6 +713,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 0.5,
       "points": false,
@@ -722,7 +724,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "aliyun_acs_rds_dashboard_ConnectionUsage{instanceId=~\"$instanceId\"}",
+          "expr": "\n\n(aliyun_acs_rds_dashboard_ConnectionUsage{instanceId=~\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_rds_info{},\"instanceId\",\"$1\",\"DBInstanceId\",\"(.*)\")",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -810,6 +812,7 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 0.5,
       "points": false,
@@ -820,7 +823,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "aliyun_acs_rds_dashboard_DiskUsage{instanceId=~\"$instanceId\"}",
+          "expr": "\n\n(aliyun_acs_rds_dashboard_DiskUsage{instanceId=~\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_rds_info{},\"instanceId\",\"$1\",\"DBInstanceId\",\"(.*)\")",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -891,19 +894,20 @@
       "type": "row"
     }
   ],
-  "schemaVersion": 16,
+  "schemaVersion": 18,
   "style": "dark",
   "tags": [
-    "RDS",
-    "detail"
+    "Prometheus",
+    "ALIYUN",
+    "RDS"
   ],
   "templating": {
     "list": [
       {
         "allValue": null,
         "current": {
-          "text": "fenshua123-rw",
-          "value": "fenshua123-rw"
+          "text": "GC-WMS-DBNEW",
+          "value": "GC-WMS-DBNEW"
         },
         "datasource": "Prometheus",
         "definition": "label_values(aliyun_meta_rds_info, DBInstanceDescription)",
@@ -912,360 +916,9 @@
         "label": null,
         "multi": false,
         "name": "hostname",
-        "options": [
-          {
-            "selected": false,
-            "text": "fenshua123-rw",
-            "value": "fenshua123-rw"
-          },
-          {
-            "selected": false,
-            "text": "fenshua123-ro01",
-            "value": "fenshua123-ro01"
-          },
-          {
-            "selected": true,
-            "text": "wenba-main",
-            "value": "wenba-main"
-          },
-          {
-            "selected": false,
-            "text": "fenshua123-ro02",
-            "value": "fenshua123-ro02"
-          },
-          {
-            "selected": false,
-            "text": "fenshua123-ro03",
-            "value": "fenshua123-ro03"
-          },
-          {
-            "selected": false,
-            "text": "hottrends",
-            "value": "hottrends"
-          },
-          {
-            "selected": false,
-            "text": "fenshua123-ro04",
-            "value": "fenshua123-ro04"
-          },
-          {
-            "selected": false,
-            "text": "logcolletor",
-            "value": "logcolletor"
-          },
-          {
-            "selected": false,
-            "text": "resdownload",
-            "value": "resdownload"
-          },
-          {
-            "selected": false,
-            "text": "fenshua123-ro05",
-            "value": "fenshua123-ro05"
-          },
-          {
-            "selected": false,
-            "text": "fenshua123-dts",
-            "value": "fenshua123-dts"
-          },
-          {
-            "selected": false,
-            "text": "fenshua123-dts-ro01",
-            "value": "fenshua123-dts-ro01"
-          },
-          {
-            "selected": false,
-            "text": "fenshua123-dts-ro02",
-            "value": "fenshua123-dts-ro02"
-          },
-          {
-            "selected": false,
-            "text": "fenshua123-dts-ro03",
-            "value": "fenshua123-dts-ro03"
-          },
-          {
-            "selected": false,
-            "text": "user-noti-main",
-            "value": "user-noti-main"
-          },
-          {
-            "selected": false,
-            "text": "offlineresultdb",
-            "value": "offlineresultdb"
-          },
-          {
-            "selected": false,
-            "text": "fenshua123-dts-ro04",
-            "value": "fenshua123-dts-ro04"
-          },
-          {
-            "selected": false,
-            "text": "fenshua123-dts-ro05",
-            "value": "fenshua123-dts-ro05"
-          },
-          {
-            "selected": false,
-            "text": "designsnapshot-rds",
-            "value": "designsnapshot-rds"
-          },
-          {
-            "selected": false,
-            "text": "site-other-database",
-            "value": "site-other-database"
-          },
-          {
-            "selected": false,
-            "text": "renderpic",
-            "value": "renderpic"
-          },
-          {
-            "selected": false,
-            "text": "monitor-guanxing",
-            "value": "monitor-guanxing"
-          },
-          {
-            "selected": false,
-            "text": "rendersnapshot",
-            "value": "rendersnapshot"
-          },
-          {
-            "selected": false,
-            "text": "Oauth",
-            "value": "Oauth"
-          },
-          {
-            "selected": false,
-            "text": "datasite",
-            "value": "datasite"
-          },
-          {
-            "selected": false,
-            "text": "designservice-multi",
-            "value": "designservice-multi"
-          },
-          {
-            "selected": false,
-            "text": "site-feed",
-            "value": "site-feed"
-          },
-          {
-            "selected": false,
-            "text": "opensearch-site-prod",
-            "value": "opensearch-site-prod"
-          },
-          {
-            "selected": false,
-            "text": "opensearch-site-dev",
-            "value": "opensearch-site-dev"
-          },
-          {
-            "selected": false,
-            "text": "marketing",
-            "value": "marketing"
-          },
-          {
-            "selected": false,
-            "text": "toad",
-            "value": "toad"
-          },
-          {
-            "selected": false,
-            "text": "brandgood",
-            "value": "brandgood"
-          },
-          {
-            "selected": false,
-            "text": "retail",
-            "value": "retail"
-          },
-          {
-            "selected": false,
-            "text": "ddsdb",
-            "value": "ddsdb"
-          },
-          {
-            "selected": false,
-            "text": "uac",
-            "value": "uac"
-          },
-          {
-            "selected": false,
-            "text": "server_info",
-            "value": "server_info"
-          },
-          {
-            "selected": false,
-            "text": "customdb",
-            "value": "customdb"
-          },
-          {
-            "selected": false,
-            "text": "mobile",
-            "value": "mobile"
-          },
-          {
-            "selected": false,
-            "text": "userbiz",
-            "value": "userbiz"
-          },
-          {
-            "selected": false,
-            "text": "tddl",
-            "value": "tddl"
-          },
-          {
-            "selected": false,
-            "text": "item_center",
-            "value": "item_center"
-          },
-          {
-            "selected": false,
-            "text": "decoration",
-            "value": "decoration"
-          },
-          {
-            "selected": false,
-            "text": "render",
-            "value": "render"
-          },
-          {
-            "selected": false,
-            "text": "koolvr",
-            "value": "koolvr"
-          },
-          {
-            "selected": false,
-            "text": "construction",
-            "value": "construction"
-          },
-          {
-            "selected": false,
-            "text": "growth",
-            "value": "growth"
-          },
-          {
-            "selected": false,
-            "text": "order_center",
-            "value": "order_center"
-          },
-          {
-            "selected": false,
-            "text": "coops",
-            "value": "coops"
-          },
-          {
-            "selected": false,
-            "text": "qhrenderprod",
-            "value": "qhrenderprod"
-          },
-          {
-            "selected": false,
-            "text": "geom",
-            "value": "geom"
-          },
-          {
-            "selected": false,
-            "text": "yuntai",
-            "value": "yuntai"
-          },
-          {
-            "selected": false,
-            "text": "product",
-            "value": "product"
-          },
-          {
-            "selected": false,
-            "text": "custom_configuration",
-            "value": "custom_configuration"
-          },
-          {
-            "selected": false,
-            "text": "render_backend",
-            "value": "render_backend"
-          },
-          {
-            "selected": false,
-            "text": "importdb",
-            "value": "importdb"
-          },
-          {
-            "selected": false,
-            "text": "saas_new",
-            "value": "saas_new"
-          },
-          {
-            "selected": false,
-            "text": "param_editor",
-            "value": "param_editor"
-          },
-          {
-            "selected": false,
-            "text": "message",
-            "value": "message"
-          },
-          {
-            "selected": false,
-            "text": "param_script",
-            "value": "param_script"
-          },
-          {
-            "selected": false,
-            "text": "project_storage",
-            "value": "project_storage"
-          },
-          {
-            "selected": false,
-            "text": "saas_others",
-            "value": "saas_others"
-          },
-          {
-            "selected": false,
-            "text": "real_time",
-            "value": "real_time"
-          },
-          {
-            "selected": false,
-            "text": "fenshua123-dts2",
-            "value": "fenshua123-dts2"
-          },
-          {
-            "selected": false,
-            "text": "dcs_auth",
-            "value": "dcs_auth"
-          },
-          {
-            "selected": false,
-            "text": "saas_account",
-            "value": "saas_account"
-          },
-          {
-            "selected": false,
-            "text": "brandgood_logic",
-            "value": "brandgood_logic"
-          },
-          {
-            "selected": false,
-            "text": "report",
-            "value": "report"
-          },
-          {
-            "selected": false,
-            "text": "project_design",
-            "value": "project_design"
-          },
-          {
-            "selected": false,
-            "text": "project_user",
-            "value": "project_user"
-          },
-          {
-            "selected": false,
-            "text": "project_sit",
-            "value": "project_sit"
-          }
-        ],
+        "options": [],
         "query": "label_values(aliyun_meta_rds_info, DBInstanceDescription)",
-        "refresh": 0,
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -1278,9 +931,8 @@
       {
         "allValue": null,
         "current": {
-          "selected": false,
-          "text": "rdsqr2m6jmebzun",
-          "value": "rdsqr2m6jmebzun"
+          "text": "rr-wz9lmy653l4451003",
+          "value": "rr-wz9lmy653l4451003"
         },
         "datasource": "Prometheus",
         "definition": "label_values(aliyun_meta_rds_info{DBInstanceDescription=\"$hostname\"}, DBInstanceId)",
@@ -1335,5 +987,5 @@
   "timezone": "",
   "title": "RDS Detail",
   "uid": "HAaLN2oik",
-  "version": 10
+  "version": 15
 }

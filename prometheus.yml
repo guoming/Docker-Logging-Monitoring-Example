@@ -27,9 +27,10 @@ scrape_configs:
   scrape_timeout: 10s
   static_configs:
     - targets: ['prometheus-alertmanager:9093']
+
 - job_name: prometheus-exporter  
-  scrape_interval: 65s
-  scrape_timeout: 60s
+  scrape_interval: 305s
+  scrape_timeout: 300s
   consul_sd_configs:
   - server: '192.168.109.166:8500'
     services: []    
@@ -103,3 +104,9 @@ scrape_configs:
      action: keep
    - regex: __meta_consul_service_metadata_(.+)
      action: labelmap
+- job_name: prometheus-sonqrqube-exporter
+  scrape_interval: 15s
+  scrape_timeout: 10s
+  metrics_path: /metrics-text
+  static_configs:
+    - targets: ['192.168.123.189:8888']

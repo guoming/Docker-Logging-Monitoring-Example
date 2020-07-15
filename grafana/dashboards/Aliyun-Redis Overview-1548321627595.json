@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1548320813307,
+  "id": 218,
+  "iteration": 1594776930969,
   "links": [],
   "panels": [
     {
@@ -27,6 +28,7 @@
         "rgba(237, 129, 40, 0.89)",
         "#299c46"
       ],
+      "datasource": "Prometheus",
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -52,6 +54,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -72,7 +75,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(aliyun_meta_rds_info{DBInstanceStatus=\"Running\"})",
+          "expr": "sum(aliyun_meta_redis_info)",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -94,8 +97,6 @@
     {
       "cacheTimeout": null,
       "colorBackground": true,
-      "colorPostfix": false,
-      "colorPrefix": false,
       "colorValue": false,
       "colors": [
         "#299c46",
@@ -103,7 +104,7 @@
         "#d44a3a"
       ],
       "datasource": "Alertmanager",
-      "format": "short",
+      "format": "none",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -117,7 +118,7 @@
         "x": 6,
         "y": 0
       },
-      "id": 9,
+      "id": 6,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -134,7 +135,8 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "postfix": "<br>RDS Alerts</br>",
+      "options": {},
+      "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
       "prefixFontSize": "50%",
@@ -155,7 +157,7 @@
       "targets": [
         {
           "annotations": false,
-          "expr": "alertname=~\"rds.*\"",
+          "expr": "alertname=~\"redis.*\"",
           "format": "time_series",
           "intervalFactor": 1,
           "labelSelector": "*",
@@ -165,10 +167,10 @@
           "type": "single"
         }
       ],
-      "thresholds": "1,1,2",
-      "title": "",
+      "thresholds": "1,2,5",
+      "title": "Redis Alerts",
       "type": "singlestat",
-      "valueFontSize": "100%",
+      "valueFontSize": "80%",
       "valueMaps": [
         {
           "op": "=",
@@ -176,7 +178,7 @@
           "value": "null"
         }
       ],
-      "valueName": "current"
+      "valueName": "avg"
     },
     {
       "cacheTimeout": null,
@@ -187,7 +189,8 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "format": "bps",
+      "datasource": "Prometheus",
+      "format": "Bps",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -199,86 +202,6 @@
         "h": 3,
         "w": 6,
         "x": 12,
-        "y": 0
-      },
-      "id": 11,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": true,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": true
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "sum(aliyun_acs_rds_dashboard_MySQL_NetworkOutNew)",
-          "format": "time_series",
-          "instant": false,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "",
-      "title": "Overall Tx",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
-      ],
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 6,
-        "x": 18,
         "y": 0
       },
       "id": 5,
@@ -298,6 +221,7 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
+      "options": {},
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -318,14 +242,95 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(aliyun_acs_rds_dashboard_MySQL_ActiveSessions)",
+          "expr": "sum(aliyun_acs_kvstore_IntranetIn)",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
         }
       ],
       "thresholds": "",
-      "title": "Overall Connections",
+      "title": "Overall Rx",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": false,
+      "colors": [
+        "#299c46",
+        "rgba(237, 129, 40, 0.89)",
+        "#d44a3a"
+      ],
+      "datasource": "Prometheus",
+      "format": "Bps",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "id": 10,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "options": {},
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": true,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": true
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "sum(aliyun_acs_kvstore_IntranetOut)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "",
+      "title": "Overall Tx",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -339,20 +344,22 @@
     },
     {
       "columns": [],
+      "datasource": "Prometheus",
       "fontSize": "100%",
       "gridPos": {
-        "h": 19,
+        "h": 14,
         "w": 24,
         "x": 0,
         "y": 3
       },
       "id": 2,
       "links": [],
+      "options": {},
       "pageSize": null,
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 7,
+        "col": 6,
         "desc": true
       },
       "styles": [
@@ -401,7 +408,7 @@
           "unit": "percent"
         },
         {
-          "alias": "IOPS",
+          "alias": "Rx Usage",
           "colorMode": "cell",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -420,7 +427,7 @@
           "unit": "percent"
         },
         {
-          "alias": "Disk Usage",
+          "alias": "Tx Usage",
           "colorMode": "cell",
           "colors": [
             "rgba(50, 172, 45, 0.97)",
@@ -468,9 +475,9 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "instance",
+          "pattern": "InstanceName",
           "thresholds": [],
-          "type": "hidden",
+          "type": "string",
           "unit": "short"
         },
         {
@@ -484,9 +491,9 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "job",
+          "pattern": "RegionId",
           "thresholds": [],
-          "type": "hidden",
+          "type": "string",
           "unit": "short"
         },
         {
@@ -502,7 +509,7 @@
           "mappingType": 1,
           "pattern": "userId",
           "thresholds": [],
-          "type": "hidden",
+          "type": "string",
           "unit": "short"
         },
         {
@@ -516,9 +523,9 @@
           "dateFormat": "YYYY-MM-DD HH:mm:ss",
           "decimals": 2,
           "mappingType": 1,
-          "pattern": "DBInstanceStatus",
+          "pattern": "PrivateIp",
           "thresholds": [],
-          "type": "hidden",
+          "type": "string",
           "unit": "short"
         },
         {
@@ -533,7 +540,7 @@
           "decimals": 2,
           "link": true,
           "linkTooltip": "detail view",
-          "linkUrl": "/d/HAaLN2oik/rds-detail?orgId=1&var-instanceId=${__cell}",
+          "linkUrl": "/d/5xcn_zlik/redis-detail?orgId=1&var-instanceId=${__cell}",
           "mappingType": 1,
           "pattern": "instanceId",
           "thresholds": [],
@@ -554,41 +561,41 @@
             "70",
             "90"
           ],
-          "type": "number",
+          "type": "hidden",
           "unit": "short"
         }
       ],
       "targets": [
         {
-          "expr": "avg_over_time(aliyun_acs_rds_dashboard_CpuUsage[$interval]) * on (instanceId) group_left(DBInstanceDescription,DBInstanceStatus) \nlabel_replace(aliyun_meta_rds_info, \"instanceId\", \"$1\", \"DBInstanceId\", \"(.*)\") >= $threshold",
+          "expr": "avg_over_time(aliyun_acs_kvstore_CpuUsage[$interval]) * on (instanceId,instance) group_left(PrivateIp,InstanceName,RegionId) \nlabel_replace(aliyun_meta_redis_info, \"instanceId\", \"$1\", \"UserName\", \"(.*)\") >= $threshold",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
           "refId": "A"
         },
         {
-          "expr": "avg_over_time(aliyun_acs_rds_dashboard_MemoryUsage[$interval]) * on (instanceId) group_left(DBInstanceDescription,DBInstanceStatus) \nlabel_replace(aliyun_meta_rds_info, \"instanceId\", \"$1\", \"DBInstanceId\", \"(.*)\") >= $threshold",
+          "expr": "avg_over_time(aliyun_acs_kvstore_MemoryUsage[$interval]) * on (instanceId,instance) group_left(PrivateIp,InstanceName,RegionId) \nlabel_replace(aliyun_meta_redis_info, \"instanceId\", \"$1\", \"UserName\", \"(.*)\") >= $threshold",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
           "refId": "B"
         },
         {
-          "expr": "avg_over_time(aliyun_acs_rds_dashboard_IOPSUsage[$interval]) * on (instanceId) group_left(DBInstanceDescription,DBInstanceStatus) \nlabel_replace(aliyun_meta_rds_info, \"instanceId\", \"$1\", \"DBInstanceId\", \"(.*)\") >= $threshold",
+          "expr": "avg_over_time(aliyun_acs_kvstore_IntranetInRatio[$interval]) * on (instanceId,instance) group_left(PrivateIp,InstanceName,RegionId) \nlabel_replace(aliyun_meta_redis_info, \"instanceId\", \"$1\", \"UserName\", \"(.*)\") >= $threshold",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
           "refId": "C"
         },
         {
-          "expr": "avg_over_time(aliyun_acs_rds_dashboard_DiskUsage[$interval]) * on (instanceId) group_left(DBInstanceDescription,DBInstanceStatus) \nlabel_replace(aliyun_meta_rds_info, \"instanceId\", \"$1\", \"DBInstanceId\", \"(.*)\") >= $threshold",
+          "expr": "avg_over_time(aliyun_acs_kvstore_IntranetOutRatio[$interval]) * on (instanceId,instance) group_left(PrivateIp,InstanceName,RegionId) \nlabel_replace(aliyun_meta_redis_info, \"instanceId\", \"$1\", \"UserName\", \"(.*)\") >= $threshold",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
           "refId": "D"
         },
         {
-          "expr": "avg_over_time(aliyun_acs_rds_dashboard_ConnectionUsage[$interval]) * on (instanceId) group_left(DBInstanceDescription,DBInstanceStatus) \nlabel_replace(aliyun_meta_rds_info, \"instanceId\", \"$1\", \"DBInstanceId\", \"(.*)\") >= $threshold",
+          "expr": "avg_over_time(aliyun_acs_kvstore_ConnectionUsage[$interval]) * on (instanceId,instance) group_left(PrivateIp,InstanceName,RegionId) \nlabel_replace(aliyun_meta_redis_info, \"instanceId\", \"$1\", \"UserName\", \"(.*)\") >= $threshold",
           "format": "table",
           "instant": true,
           "intervalFactor": 1,
@@ -600,9 +607,13 @@
       "type": "table"
     }
   ],
-  "schemaVersion": 16,
+  "schemaVersion": 18,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "Prometheus",
+    "ALIYUN",
+    "REDIS"
+  ],
   "templating": {
     "list": [
       {
@@ -728,7 +739,7 @@
     ]
   },
   "timezone": "",
-  "title": "RDS Overview",
-  "uid": "VEeoHRliz",
-  "version": 1
+  "title": "Redis Overview",
+  "uid": "9HKNPglik",
+  "version": 5
 }

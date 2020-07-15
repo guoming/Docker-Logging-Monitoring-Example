@@ -12,38 +12,660 @@
       }
     ]
   },
+  "description": "Alibaba Cloud ECS Instance Dashboard",
   "editable": true,
-  "gnetId": null,
+  "gnetId": 9458,
   "graphTooltip": 0,
-  "iteration": 1548321644593,
-  "links": [],
+  "id": 214,
+  "iteration": 1594776914955,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "tags": [
+        "ECS"
+      ],
+      "targetBlank": false,
+      "type": "dashboards"
+    }
+  ],
   "panels": [
     {
-      "collapsed": false,
+      "columns": [],
+      "datasource": "Prometheus",
+      "fontSize": "120%",
       "gridPos": {
-        "h": 1,
+        "h": 3,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 11,
-      "panels": [],
-      "title": "Traffic Overview",
-      "type": "row"
+      "id": 18,
+      "links": [],
+      "options": {},
+      "pageSize": 1,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 0,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "Time",
+          "type": "hidden"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "HostName",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Vpc IP",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "VpcAttributes",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Inner IP",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "InnerIpAddress",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "InstanceType",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Status",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Cpu",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Memory",
+          "thresholds": [],
+          "type": "number",
+          "unit": "decmbytes"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "OSName",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "RegionId",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "ZoneId",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "expr": "aliyun_meta_ecs_info{InstanceId=\"$instanceId\"}",
+          "format": "table",
+          "instant": true,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "title": "",
+      "transform": "table",
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "alert": {
+        "conditions": [
+          {
+            "evaluator": {
+              "params": [
+                80
+              ],
+              "type": "gt"
+            },
+            "operator": {
+              "type": "and"
+            },
+            "query": {
+              "params": [
+                "A",
+                "5m",
+                "now"
+              ]
+            },
+            "reducer": {
+              "params": [],
+              "type": "last"
+            },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "name": "Aliyun CPU Utilization Percent alert",
+        "noDataState": "ok",
+        "notifications": [
+          {
+            "uid": "Vn9yrgRWz"
+          }
+        ]
+      },
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 3
+      },
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "\n(aliyun_acs_ecs_dashboard_CPUUtilization{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Utilization",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 80
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU Utilization Percent",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 3
+      },
+      "id": 3,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(aliyun_acs_ecs_dashboard_memory_usedutilization{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Utilization",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Memory Utilization Percent",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 3
+      },
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "\n(aliyun_acs_ecs_dashboard_memory_usedutilization{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Utilization",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Disk Utilization Percent",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 3
+      },
+      "id": 9,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(aliyun_acs_ecs_dashboard_fs_inodeutilization{instanceId=\"$instanceId\"}) * on (instanceId,instance)   group_left(HostName) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Utilization",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "inode Utilization Percent",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 5,
         "w": 12,
         "x": 0,
-        "y": 1
+        "y": 8
       },
-      "id": 2,
+      "id": 4,
       "legend": {
         "avg": false,
         "current": false,
@@ -56,7 +678,8 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
@@ -67,17 +690,125 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(aliyun_acs_slb_dashboard_TrafficRXNew{vip=\"$vip\",port=~\"$port\"})",
+          "expr": "(aliyun_acs_ecs_dashboard_load_1m{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "RX",
+          "legendFormat": "1m",
           "refId": "A"
         },
         {
-          "expr": "sum(aliyun_acs_slb_dashboard_TrafficTXNew{vip=\"$vip\",port=~\"$port\"})",
+          "expr": "\n(aliyun_acs_ecs_dashboard_load_5m{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "TX",
+          "legendFormat": "5m",
+          "refId": "B"
+        },
+        {
+          "expr": "\n(aliyun_acs_ecs_dashboard_load_15m{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "15m",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "LoadAvg",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "description": "\"Actual Used\" do not include cache/buffer",
+      "fill": 1,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 7,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(aliyun_acs_ecs_dashboard_memory_totalspace{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Total",
+          "refId": "A"
+        },
+        {
+          "expr": "(aliyun_acs_ecs_dashboard_memory_usedspace{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Used",
+          "refId": "C"
+        },
+        {
+          "expr": "(aliyun_acs_ecs_dashboard_memory_actualusedspace{instanceId=\"$instanceId\"}) * on (instanceId,instance) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Actual Used",
           "refId": "B"
         }
       ],
@@ -85,7 +816,200 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Traffic",
+      "title": "Memory Utilization",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 14,
+      "panels": [],
+      "title": "Network",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 5,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "(aliyun_acs_ecs_dashboard_net_tcpconnection{instanceId=\"$instanceId\"}) * on (instanceId,instance)   group_left(HostName) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{ state }}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "TCP Connections",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 19
+      },
+      "id": 15,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "options": {},
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(aliyun_acs_ecs_dashboard_IntranetIn{instanceId=\"$instanceId\"})",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Rx",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(aliyun_acs_ecs_dashboard_IntranetOut{instanceId=\"$instanceId\"})",
+          "format": "time_series",
+          "hide": true,
+          "intervalFactor": 1,
+          "legendFormat": "Tx",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Intranet Traffic",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -105,489 +1029,6 @@
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 1
-      },
-      "id": 4,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "avg(aliyun_acs_slb_dashboard_Rt{vip=\"$vip\",port=~\"$port\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "SLB",
-          "refId": "A"
-        },
-        {
-          "expr": "avg(aliyun_acs_slb_dashboard_UpstreamRt{vip=\"$vip\",port=~\"$port\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Upstream",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "RT",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "ms",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 0,
-        "y": 6
-      },
-      "id": 3,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": false,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(aliyun_acs_slb_dashboard_Qps{vip=\"$vip\",port=~\"$port\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "QPS",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "ops",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 6
-      },
-      "id": 12,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "5XX",
-          "color": "#bf1b00",
-          "fill": 6
-        }
-      ],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(aliyun_acs_slb_dashboard_StatusCode4xx{vip=\"$vip\",port=~\"$port\"}) / sum(aliyun_acs_slb_dashboard_Qps{vip=\"$vip\",port=~\"$port\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "4XX",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(aliyun_acs_slb_dashboard_StatusCode5xx{vip=\"$vip\",port=~\"$port\"}) / sum(aliyun_acs_slb_dashboard_Qps{vip=\"$vip\",port=~\"$port\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "5XX",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Error Percent",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 0,
-        "y": 11
-      },
-      "id": 5,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "5XX",
-          "color": "#bf1b00",
-          "fill": 7
-        },
-        {
-          "alias": "3XX",
-          "color": "#6ed0e0"
-        },
-        {
-          "alias": "4XX",
-          "color": "#cca300",
-          "fill": 4
-        }
-      ],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(aliyun_acs_slb_dashboard_StatusCode2xx{vip=\"$vip\",port=~\"$port\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "2XX",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(aliyun_acs_slb_dashboard_StatusCode3xx{vip=\"$vip\",port=~\"$port\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "3XX",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(aliyun_acs_slb_dashboard_StatusCode4xx{vip=\"$vip\",port=~\"$port\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "4XX",
-          "refId": "C"
-        },
-        {
-          "expr": "sum(aliyun_acs_slb_dashboard_StatusCode5xx{vip=\"$vip\",port=~\"$port\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "5XX",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "StatusCode",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "ops",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 11
-      },
-      "id": 13,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(aliyun_acs_slb_dashboard_DropTrafficTX{vip=\"$vip\",port=~\"$port\"}) / sum(aliyun_acs_slb_dashboard_TrafficTXNew{vip=\"$vip\",port=~\"$port\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "5XX",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(aliyun_acs_slb_dashboard_DropTrafficRX{vip=\"$vip\",port=~\"$port\"}) / sum(aliyun_acs_slb_dashboard_TrafficRXNew{vip=\"$vip\",port=~\"$port\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "4XX",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Traffic Drop Percent",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
@@ -606,29 +1047,17 @@
       }
     },
     {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 16
-      },
-      "id": 7,
-      "panels": [],
-      "title": "Connections",
-      "type": "row"
-    },
-    {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 5,
         "w": 12,
-        "x": 0,
-        "y": 17
+        "x": 12,
+        "y": 19
       },
       "id": 16,
       "legend": {
@@ -643,34 +1072,29 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "Unhealthy",
-          "color": "#bf1b00",
-          "fill": 6
-        }
-      ],
+      "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(aliyun_acs_slb_dashboard_ActiveConnection{vip=\"$vip\",port=~\"$port\"})",
+          "expr": "sum(aliyun_acs_ecs_dashboard_InternetIn{instanceId=\"$instanceId\"})",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Active",
+          "legendFormat": "Rx",
           "refId": "A"
         },
         {
-          "expr": "sum(aliyun_acs_slb_dashboard_MaxConnection{vip=\"$vip\",port=~\"$port\"})",
+          "expr": "sum(aliyun_acs_ecs_dashboard_InternetOut{instanceId=\"$instanceId\"})",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Max",
+          "legendFormat": "Tx",
           "refId": "B"
         }
       ],
@@ -678,7 +1102,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Connections",
+      "title": "Internet Traffic",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -694,97 +1118,7 @@
       },
       "yaxes": [
         {
-          "format": "none",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 17
-      },
-      "id": 17,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "Unhealthy",
-          "color": "#bf1b00",
-          "fill": 6
-        }
-      ],
-      "spaceLength": 10,
-      "stack": true,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(aliyun_acs_slb_dashboard_DropConnection{vip=\"$vip\",port=~\"$port\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Dropped",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Drop Connections",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "none",
+          "format": "bps",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -811,11 +1145,11 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 22
+        "y": 24
       },
-      "id": 9,
+      "id": 12,
       "panels": [],
-      "title": "Upstream",
+      "title": "Disk IO",
       "type": "row"
     },
     {
@@ -823,14 +1157,15 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 12,
         "x": 0,
-        "y": 23
+        "y": 25
       },
-      "id": 14,
+      "id": 8,
       "legend": {
         "avg": false,
         "current": false,
@@ -843,34 +1178,29 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "Unhealthy",
-          "color": "#bf1b00",
-          "fill": 6
-        }
-      ],
+      "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(aliyun_acs_slb_dashboard_HeathyServerCount{vip=\"$vip\",port=~\"$port\"})",
+          "expr": "(aliyun_acs_ecs_dashboard_DiskReadBPS{instanceId=\"$instanceId\"}) * on (instanceId,instance)   group_left(HostName) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Healthy",
+          "legendFormat": "Read",
           "refId": "A"
         },
         {
-          "expr": "sum(aliyun_acs_slb_dashboard_UnhealthyServerCount{vip=\"$vip\",port=~\"$port\"})",
+          "expr": "(aliyun_acs_ecs_dashboard_DiskWriteBPS{instanceId=\"$instanceId\"}) * on (instanceId,instance)   group_left(HostName) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Unhealthy",
+          "legendFormat": "Write",
           "refId": "B"
         }
       ],
@@ -878,7 +1208,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Upstream Servers",
+      "title": "Disk I/O",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -894,7 +1224,7 @@
       },
       "yaxes": [
         {
-          "format": "none",
+          "format": "bps",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -920,14 +1250,15 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
-        "h": 5,
+        "h": 6,
         "w": 12,
         "x": 12,
-        "y": 23
+        "y": 25
       },
-      "id": 15,
+      "id": 10,
       "legend": {
         "avg": false,
         "current": false,
@@ -940,34 +1271,29 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
+      "options": {},
       "percentage": false,
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [
-        {
-          "alias": "Unhealthy",
-          "color": "#bf1b00",
-          "fill": 6
-        }
-      ],
+      "seriesOverrides": [],
       "spaceLength": 10,
-      "stack": true,
+      "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(aliyun_acs_slb_dashboard_UpstreamCode4xx{vip=\"$vip\",port=~\"$port\"})",
+          "expr": "(aliyun_acs_ecs_dashboard_DiskReadIOPS{instanceId=\"$instanceId\"}) * on (instanceId,instance)   group_left(HostName) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "4XX",
+          "legendFormat": "Read",
           "refId": "A"
         },
         {
-          "expr": "sum(aliyun_acs_slb_dashboard_UpstreamCode5xx{vip=\"$vip\",port=~\"$port\"})",
+          "expr": "(aliyun_acs_ecs_dashboard_DiskWriteIOPS{instanceId=\"$instanceId\"}) * on (instanceId,instance)   group_left(HostName) \nlabel_replace(aliyun_meta_ecs_info{},\"instanceId\",\"$1\",\"InstanceId\",\"(.*)\")",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "5XX",
+          "legendFormat": "Write",
           "refId": "B"
         }
       ],
@@ -975,7 +1301,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Upstream Error Rate",
+      "title": "Disk IOPS",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -991,7 +1317,7 @@
       },
       "yaxes": [
         {
-          "format": "none",
+          "format": "iops",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -1013,296 +1339,32 @@
       }
     }
   ],
-  "schemaVersion": 16,
+  "refresh": false,
+  "schemaVersion": 18,
   "style": "dark",
   "tags": [
-    "SLB",
-    "detail"
+    "ALIYUN",
+    "Prometheus",
+    "ECS"
   ],
   "templating": {
     "list": [
       {
         "allValue": null,
         "current": {
-          "text": "223.6.255.140",
-          "value": "223.6.255.140"
+          "text": "iZu1vog08veZ",
+          "value": "iZu1vog08veZ"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(aliyun_acs_slb_dashboard_MaxConnection, vip)",
+        "definition": "label_values(aliyun_meta_ecs_info, HostName)",
         "hide": 0,
         "includeAll": false,
         "label": null,
         "multi": false,
-        "name": "vip",
-        "options": [
-          {
-            "selected": true,
-            "text": "223.6.255.140",
-            "value": "223.6.255.140"
-          },
-          {
-            "selected": false,
-            "text": "120.55.148.50",
-            "value": "120.55.148.50"
-          },
-          {
-            "selected": false,
-            "text": "100.98.153.0",
-            "value": "100.98.153.0"
-          },
-          {
-            "selected": false,
-            "text": "120.55.248.180",
-            "value": "120.55.248.180"
-          },
-          {
-            "selected": false,
-            "text": "100.98.152.150",
-            "value": "100.98.152.150"
-          },
-          {
-            "selected": false,
-            "text": "120.55.251.254",
-            "value": "120.55.251.254"
-          },
-          {
-            "selected": false,
-            "text": "120.55.104.56",
-            "value": "120.55.104.56"
-          },
-          {
-            "selected": false,
-            "text": "100.98.210.121",
-            "value": "100.98.210.121"
-          },
-          {
-            "selected": false,
-            "text": "47.252.50.11",
-            "value": "47.252.50.11"
-          },
-          {
-            "selected": false,
-            "text": "10.111.211.160",
-            "value": "10.111.211.160"
-          },
-          {
-            "selected": false,
-            "text": "10.111.211.175",
-            "value": "10.111.211.175"
-          },
-          {
-            "selected": false,
-            "text": "118.178.155.40",
-            "value": "118.178.155.40"
-          },
-          {
-            "selected": false,
-            "text": "10.111.7.213",
-            "value": "10.111.7.213"
-          },
-          {
-            "selected": false,
-            "text": "120.55.24.53",
-            "value": "120.55.24.53"
-          },
-          {
-            "selected": false,
-            "text": "10.111.8.54",
-            "value": "10.111.8.54"
-          },
-          {
-            "selected": false,
-            "text": "10.142.31.177",
-            "value": "10.142.31.177"
-          },
-          {
-            "selected": false,
-            "text": "10.111.6.209",
-            "value": "10.111.6.209"
-          },
-          {
-            "selected": false,
-            "text": "47.97.243.173",
-            "value": "47.97.243.173"
-          },
-          {
-            "selected": false,
-            "text": "120.55.139.203",
-            "value": "120.55.139.203"
-          },
-          {
-            "selected": false,
-            "text": "10.111.5.129",
-            "value": "10.111.5.129"
-          },
-          {
-            "selected": false,
-            "text": "10.140.85.146",
-            "value": "10.140.85.146"
-          },
-          {
-            "selected": false,
-            "text": "10.111.5.217",
-            "value": "10.111.5.217"
-          },
-          {
-            "selected": false,
-            "text": "10.111.2.223",
-            "value": "10.111.2.223"
-          },
-          {
-            "selected": false,
-            "text": "10.111.6.1",
-            "value": "10.111.6.1"
-          },
-          {
-            "selected": false,
-            "text": "10.111.7.209",
-            "value": "10.111.7.209"
-          },
-          {
-            "selected": false,
-            "text": "120.55.23.74",
-            "value": "120.55.23.74"
-          },
-          {
-            "selected": false,
-            "text": "10.111.6.252",
-            "value": "10.111.6.252"
-          },
-          {
-            "selected": false,
-            "text": "10.111.6.251",
-            "value": "10.111.6.251"
-          },
-          {
-            "selected": false,
-            "text": "10.111.9.49",
-            "value": "10.111.9.49"
-          },
-          {
-            "selected": false,
-            "text": "10.111.6.32",
-            "value": "10.111.6.32"
-          },
-          {
-            "selected": false,
-            "text": "10.111.2.216",
-            "value": "10.111.2.216"
-          },
-          {
-            "selected": false,
-            "text": "47.96.62.21",
-            "value": "47.96.62.21"
-          },
-          {
-            "selected": false,
-            "text": "47.96.61.97",
-            "value": "47.96.61.97"
-          },
-          {
-            "selected": false,
-            "text": "47.96.219.115",
-            "value": "47.96.219.115"
-          },
-          {
-            "selected": false,
-            "text": "10.111.6.197",
-            "value": "10.111.6.197"
-          },
-          {
-            "selected": false,
-            "text": "10.111.7.221",
-            "value": "10.111.7.221"
-          },
-          {
-            "selected": false,
-            "text": "10.111.8.242",
-            "value": "10.111.8.242"
-          },
-          {
-            "selected": false,
-            "text": "10.111.10.61",
-            "value": "10.111.10.61"
-          },
-          {
-            "selected": false,
-            "text": "47.98.66.188",
-            "value": "47.98.66.188"
-          },
-          {
-            "selected": false,
-            "text": "116.62.95.159",
-            "value": "116.62.95.159"
-          },
-          {
-            "selected": false,
-            "text": "10.111.5.147",
-            "value": "10.111.5.147"
-          },
-          {
-            "selected": false,
-            "text": "47.98.18.178",
-            "value": "47.98.18.178"
-          },
-          {
-            "selected": false,
-            "text": "101.37.103.196",
-            "value": "101.37.103.196"
-          },
-          {
-            "selected": false,
-            "text": "47.98.88.76",
-            "value": "47.98.88.76"
-          },
-          {
-            "selected": false,
-            "text": "118.31.218.169",
-            "value": "118.31.218.169"
-          },
-          {
-            "selected": false,
-            "text": "10.111.6.224",
-            "value": "10.111.6.224"
-          },
-          {
-            "selected": false,
-            "text": "120.55.32.188",
-            "value": "120.55.32.188"
-          },
-          {
-            "selected": false,
-            "text": "10.111.4.107",
-            "value": "10.111.4.107"
-          },
-          {
-            "selected": false,
-            "text": "47.98.88.11",
-            "value": "47.98.88.11"
-          },
-          {
-            "selected": false,
-            "text": "47.98.19.225",
-            "value": "47.98.19.225"
-          },
-          {
-            "selected": false,
-            "text": "120.55.29.59",
-            "value": "120.55.29.59"
-          },
-          {
-            "selected": false,
-            "text": "10.111.7.222",
-            "value": "10.111.7.222"
-          },
-          {
-            "selected": false,
-            "text": "47.90.111.114",
-            "value": "47.90.111.114"
-          }
-        ],
-        "query": "label_values(aliyun_acs_slb_dashboard_MaxConnection, vip)",
-        "refresh": 0,
+        "name": "hostname",
+        "options": [],
+        "query": "label_values(aliyun_meta_ecs_info, HostName)",
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
@@ -1315,41 +1377,22 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
+          "text": "i-wz97k1pv4dyjgzpeh34q",
+          "value": "i-wz97k1pv4dyjgzpeh34q"
         },
         "datasource": "Prometheus",
-        "definition": "label_values(aliyun_acs_slb_dashboard_MaxConnection{vip=\"$vip\"}, port)",
+        "definition": "label_values(aliyun_meta_ecs_info{HostName=\"$hostname\"}, InstanceId)",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": null,
-        "multi": true,
-        "name": "port",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "443",
-            "value": "443"
-          },
-          {
-            "selected": false,
-            "text": "80",
-            "value": "80"
-          }
-        ],
-        "query": "label_values(aliyun_acs_slb_dashboard_MaxConnection{vip=\"$vip\"}, port)",
-        "refresh": 0,
+        "multi": false,
+        "name": "instanceId",
+        "options": [],
+        "query": "label_values(aliyun_meta_ecs_info{HostName=\"$hostname\"}, InstanceId)",
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -1359,7 +1402,7 @@
     ]
   },
   "time": {
-    "from": "now-2h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -1388,7 +1431,7 @@
     ]
   },
   "timezone": "",
-  "title": "SLB Detail",
-  "uid": "jqoXlkliz",
-  "version": 12
+  "title": "ECS Detail",
+  "uid": "Alxt_FEik",
+  "version": 21
 }

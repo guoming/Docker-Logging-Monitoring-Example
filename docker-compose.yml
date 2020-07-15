@@ -102,8 +102,6 @@ services:
      mode: global
      restart_policy:
       condition: on-failure
-    ports:
-      - "9100:9100"
     volumes:
       - /proc:/host/proc:ro 
       - /sys:/host/sys:ro 
@@ -120,13 +118,12 @@ services:
     deploy:
      replicas: 1
      restart_policy:
-      condition: on-failure
-    ports:
-      - "9419:9419"    
+      condition: on-failure  
     environment:
       - RABBIT_URL=http://localhost:15672
       - RABBIT_USER=guest
       - RABBIT_PASSWORD=guest      
+      - RABBIT_EXPORTERS=connections,shovel,federation,exchange,node,queue
       - PUBLISH_PORT=9419
       - SERVICE_NAME=prometheus-rabbitmq-exporter
       - SERVICE_TAGS=apm
@@ -139,9 +136,7 @@ services:
     deploy:
      replicas: 1
      restart_policy:
-      condition: on-failure
-    ports:
-      - "9107:9107"    
+      condition: on-failure 
     command: --consul.server=consul-node1:8500
     networks:
       - apm
@@ -155,9 +150,7 @@ services:
     deploy:
      replicas: 1
      restart_policy:
-      condition: on-failure
-    ports:
-      - "9121:9121"    
+      condition: on-failure  
     environment:
       - REDIS_ADDR=localhost:6379
       - REDIS_PASSWORD=
@@ -172,9 +165,7 @@ services:
     deploy:
      replicas: 1
      restart_policy:
-      condition: on-failure
-    ports:
-      - "9104:9104"          
+      condition: on-failure       
     command: -mongodb.uri mongodb://user:password@localhost:27017/
     networks:
       - microservice
@@ -186,6 +177,7 @@ services:
     image: justwatch/elasticsearch_exporter:1.1.0
     command:
      - '--es.uri=http://elasticsearch:9200'    
+     - '--es.all'
     restart: always
     networks:
       - microservice
@@ -199,9 +191,7 @@ services:
     deploy:
      replicas: 1
      restart_policy:
-      condition: on-failure
-    ports:
-      - "4000:4000"    
+      condition: on-failure 
     environment:
       - SERVER=localhost
       - PORT=1433
@@ -228,8 +218,6 @@ services:
      - ALIYUN_ACCESS_ID=LTAI4GHLWr9tqy63cmE1onsy
      - ALIYUN_ACCESS_SECRET=orN3eQg5pKt0BALlz3Ly0njP1j74N5
      - ALIYUN_REGION=cn-hangzhou
-    ports:
-    - 9522:9522
     restart: always
     networks:      
       - microservice
