@@ -102,6 +102,8 @@ services:
      mode: global
      restart_policy:
       condition: on-failure
+    ports:
+      - "9100:9100"
     volumes:
       - /proc:/host/proc:ro 
       - /sys:/host/sys:ro 
@@ -118,11 +120,13 @@ services:
     deploy:
      replicas: 1
      restart_policy:
-      condition: on-failure  
+      condition: on-failure
+    ports:
+      - "9419:9419"    
     environment:
-      - RABBIT_URL=http://localhost:15672
-      - RABBIT_USER=guest
-      - RABBIT_PASSWORD=guest      
+      - RABBIT_URL=http://192.168.109.166:15672
+      - RABBIT_USER=prometheus
+      - RABBIT_PASSWORD=123456      
       - RABBIT_EXPORTERS=connections,shovel,federation,exchange,node,queue
       - PUBLISH_PORT=9419
       - SERVICE_NAME=prometheus-rabbitmq-exporter
@@ -136,7 +140,9 @@ services:
     deploy:
      replicas: 1
      restart_policy:
-      condition: on-failure 
+      condition: on-failure
+    ports:
+      - "9107:9107"    
     command: --consul.server=consul-node1:8500
     networks:
       - apm
@@ -150,7 +156,9 @@ services:
     deploy:
      replicas: 1
      restart_policy:
-      condition: on-failure  
+      condition: on-failure
+    ports:
+      - "9121:9121"    
     environment:
       - REDIS_ADDR=localhost:6379
       - REDIS_PASSWORD=
@@ -165,7 +173,9 @@ services:
     deploy:
      replicas: 1
      restart_policy:
-      condition: on-failure       
+      condition: on-failure
+    ports:
+      - "9104:9104"          
     command: -mongodb.uri mongodb://user:password@localhost:27017/
     networks:
       - microservice
@@ -176,7 +186,7 @@ services:
   prometheus-elasticsearch_exporter:
     image: justwatch/elasticsearch_exporter:1.1.0
     command:
-     - '--es.uri=http://elasticsearch:9200'    
+     - '--es.uri=http://192.168.86.196:9200'    
      - '--es.all'
     restart: always
     networks:
@@ -191,7 +201,9 @@ services:
     deploy:
      replicas: 1
      restart_policy:
-      condition: on-failure 
+      condition: on-failure
+    ports:
+      - "4000:4000"    
     environment:
       - SERVER=localhost
       - PORT=1433
@@ -218,6 +230,8 @@ services:
      - ALIYUN_ACCESS_ID=LTAI4GHLWr9tqy63cmE1onsy
      - ALIYUN_ACCESS_SECRET=orN3eQg5pKt0BALlz3Ly0njP1j74N5
      - ALIYUN_REGION=cn-hangzhou
+    ports:
+    - 9522:9522
     restart: always
     networks:      
       - microservice
@@ -242,7 +256,7 @@ services:
      - SERVICE_TAGS=apm
      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
      - SPAN_STORAGE_TYPE=elasticsearch
-     - ES_SERVER_URLS=http://elasticsearch:9200
+     - ES_SERVER_URLS=http://192.168.86.196:9200
   jaeger-query:
     restart: always
     image: jaegertracing/jaeger-query
@@ -260,7 +274,7 @@ services:
      - SERVICE_TAGS=apm   
      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
      - SPAN_STORAGE_TYPE=elasticsearch
-     - ES_SERVER_URLS=http://elasticsearch:9200
+     - ES_SERVER_URLS=http://192.168.86.196:9200
   jaeger-agent:
     restart: always
     image: jaegertracing/jaeger-agent
@@ -282,3 +296,16 @@ services:
     depends_on:
         - jaeger-collector
     command: ["--reporter.type=grpc", "--reporter.grpc.host-port=jaeger-collector:14250"]
+  heartbeat:
+    restart: always
+    image: docker.elastic.co/beats/heartbeat:7.9.1
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure      
+    networks:
+      - microservice
+      - apm
+    volumes:
+      - ./heartbeat/heartbeat.yml:/usr/share/heartbeat/heartbeat.yml:ro
+    command: --strict.perms=false

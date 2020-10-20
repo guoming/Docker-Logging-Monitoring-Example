@@ -1,0 +1,91 @@
+############################# Heartbeat ######################################
+heartbeat.config.monitors:
+      # Directory + glob pattern to search for configuration files
+      path: ${path.config}/monitors.d/*.yml
+      # If enabled, heartbeat will periodically check the config.monitors path for changes
+      reload.enabled: true
+      # How often to check for changes
+      reload.period: 5s
+
+heartbeat.monitors:
+    - type: http
+       # ID used to uniquely identify this monitor in elasticsearch even if the config changes
+      id: http-monitor-01
+       # Human readable display name for this service in Uptime UI and elsewhere    
+      name: 业务前台
+      # Configure task schedule
+      schedule: '@every 30s'
+      # List or urls to query
+      urls:      
+      - http://tomsapi.hwcservice.com                                 #TOMS api
+      - http://toms.hwcservice.com/                                   #TOMS web            
+      - https://www.goodcang.net                                      #GD官网
+      - https://www.goodcang.com                                      #GD官网
+      - https://www.elogistic.com                                     #EL官网            
+      - https://static.elogistic.com/web/layui/lay/modules/layer.js   #EL 静态资源
+    - type: http
+       # ID used to uniquely identify this monitor in elasticsearch even if the config changes
+      id: http-monitor-02
+       # Human readable display name for this service in Uptime UI and elsewhere    
+      name: 业务中台
+      # Configure task schedule
+      schedule: '@every 30s'
+      # List or urls to query
+      urls:
+      - https://tms.hwcservice.com/v4/favicon.ico                             #TMS 中国站
+      - https://ustms.hwcservice.com/v4/favicon.ico                           #TMS 美国站
+      - https://uktms.hwcservice.com/v4/favicon.ico                           #TMS 英国站
+      - https://lms-api-cn.goodcang.net/healthcheck                           #LMS 接口中国
+      - https://lms-api-us.goodcang.net/healthcheck                           #LMS 接口美国  
+      - https://wos.goodcang.com                                              #WOS
+      - https://lms.goodcang.net/                                             #LMS门户    
+      - http://wms.goodcang.net:60081/                                        #WMS
+      - http://wms.goodcang.com:60081/                                        #WMS    
+    - type: http
+       # ID used to uniquely identify this monitor in elasticsearch even if the config changes
+      id: http-monitor-03
+       # Human readable display name for this service in Uptime UI and elsewhere    
+      name: 仓库前台
+      # Configure task schedule
+      schedule: '@every 30s'
+      # List or urls to query
+      urls:            
+      - http://tcms.hwcservice.com/favicon.ico                              #TCMS api      
+      - http://tcms-pda.hwcservice.com                                      #TCMS pad            
+      - https://bis.goodcang.com                                            #BIS
+      - https://wcs.goodcang.com/                                           #WCS
+      - http://ts_uk.goodcang.com:60081                                     #HMS（英国仓）
+      - http://ts_usea.goodcang.com:60081                                  #HMS（美东仓）
+      - http://ts_us_west.goodcang.com:60081                                #HMS（美西仓）
+      - http://ts_au.goodcang.com:60081                                     #HMS （澳洲仓）
+      - http://ts_de.goodcang.com:60081                                    #HMS（德国仓）
+      - http://ts_cz.goodcang.com:60081                                    #HMS（捷克仓）
+      - http://ts_ussc.goodcang.com:60081                                   #HMS（美南仓）
+      - http://ts_it.goodcang.com:60081                                     #HMS（意大利仓）
+      - http://ts_frvi.goodcang.com:60081                                   #HMS（法国仓）
+      - http://owms_uk.goodcang.net:60081/pda/index                         #OWMS
+      - http://owms_ussc.goodcang.net:60081/pda/index
+      - http://owms_uswe.goodcang.net:60081/pda/index
+      - http://owms_usea.goodcang.net:60081/pda/index
+      - http://owms_it.goodcang.net:60081/pda/index
+      - http://owms_frvi.goodcang.net:60081/pda/index
+      - http://owms_es.goodcang.net:60081/pda/index
+      - http://owms_de.goodcang.net:60081/pda/index
+      - http://owms_cz.goodcang.net:60081/pda/index
+      - http://owms_au.goodcang.net:60081/pda/index      
+    - type: http
+       # ID used to uniquely identify this monitor in elasticsearch even if the config changes
+      id: http-monitor-04
+       # Human readable display name for this service in Uptime UI and elsewhere    
+      name: 其他
+      # Configure task schedule
+      schedule: '@every 30s'
+      # List or urls to query
+      urls:
+      - https://fbg.goodcang.com/login                                      #FBG 导航    
+      - https://crm.goodcang.com/                                           #CRM
+output.elasticsearch:
+  hosts: ["192.168.86.196:9200"]
+  output.elasticsearch.index: "heartbeat-%{[agent.version]}"
+  setup.template.name: "heartbeat-%{[agent.version]}"
+  setup.template.pattern: "heartbeat-%{[agent.version]}-*"
